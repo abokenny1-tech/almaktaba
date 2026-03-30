@@ -6,307 +6,432 @@
 <title>المكتبة الطلابية | بحوث • تقارير • ملازم</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#1a3a6b;--primary-light:#2352a0;--accent:#f0a500;--accent2:#e8f4fd;--bg:#f5f7fa;--white:#fff;--text:#1e2432;--muted:#6b7280;--border:#e5e7eb;}
-*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+:root{
+  --bg:#050b14;
+  --surface:#0a1628;
+  --card:#0d1f3a;
+  --neon:#00f5c4;
+  --neon2:#7b2fff;
+  --neon3:#ff2d78;
+  --gold:#ffd700;
+  --text:#e8f4ff;
+  --muted:#6b8aad;
+  --border:rgba(0,245,196,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-.topbar{background:var(--primary);color:rgba(255,255,255,.85);padding:.5rem 5%;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;flex-wrap:wrap;gap:.4rem;}
-.topbar a{color:var(--accent);text-decoration:none;}
-nav{background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.08);position:sticky;top:0;z-index:900;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;}
+
+/* SCANLINE EFFECT */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,245,196,0.015) 2px,rgba(0,245,196,0.015) 4px);pointer-events:none;z-index:9998;}
+
+/* TOPBAR */
+.topbar{background:rgba(0,245,196,0.05);border-bottom:1px solid var(--border);padding:.5rem 5%;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;flex-wrap:wrap;gap:.4rem;}
+.topbar a{color:var(--neon);text-decoration:none;font-weight:700;}
+.topbar span{color:var(--muted);}
+.topbar .live{display:inline-flex;align-items:center;gap:.4rem;color:var(--neon);}
+.topbar .live::before{content:'';width:7px;height:7px;background:var(--neon);border-radius:50%;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* NAV */
+nav{background:rgba(5,11,20,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:900;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
 .logo-wrap{display:flex;align-items:center;gap:.8rem;}
-.logo-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
-.logo-text{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.25rem;color:var(--primary);line-height:1.2;}
-.logo-text span{display:block;font-size:.7rem;font-weight:500;color:var(--muted);}
-.nav-links{display:flex;list-style:none;gap:2rem;}
-.nav-links a{color:var(--text);text-decoration:none;font-weight:600;font-size:.92rem;padding:.3rem 0;border-bottom:2px solid transparent;transition:all .2s;}
-.nav-links a:hover{color:var(--primary);border-bottom-color:var(--accent);}
-.contact-btn{background:linear-gradient(135deg,var(--primary),var(--primary-light))!important;color:#fff!important;padding:.6rem 1.4rem!important;border-radius:50px!important;border-bottom:none!important;box-shadow:0 4px 15px rgba(26,58,107,.3);}
+.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--neon2),var(--neon));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 0 20px rgba(0,245,196,0.3);}
+.logo-text{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.2rem;color:var(--text);line-height:1.2;}
+.logo-text .neon{color:var(--neon);}
+.logo-text span{display:block;font-size:.65rem;font-weight:500;color:var(--muted);}
+.nav-links{display:flex;list-style:none;gap:1.8rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:.88rem;transition:all .2s;padding:.25rem 0;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;right:0;width:0;height:1.5px;background:var(--neon);transition:width .3s;}
+.nav-links a:hover{color:var(--neon);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:linear-gradient(135deg,var(--neon2),var(--neon))!important;color:#000!important;padding:.5rem 1.3rem!important;border-radius:50px!important;font-weight:800!important;font-size:.85rem!important;box-shadow:0 0 20px rgba(0,245,196,0.25);}
+.nav-cta::after{display:none!important;}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;}
-.hamburger span{width:25px;height:2.5px;background:var(--primary);border-radius:2px;}
-.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:#fff;padding:1.5rem 5%;box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:899;flex-direction:column;gap:1rem;}
+.hamburger span{width:24px;height:2px;background:var(--neon);border-radius:2px;display:block;}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(5,11,20,0.98);backdrop-filter:blur(20px);padding:1.5rem 5%;border-bottom:1px solid var(--border);z-index:899;flex-direction:column;gap:.8rem;}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--text);text-decoration:none;font-weight:600;font-size:1rem;padding:.5rem 0;border-bottom:1px solid var(--border);}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-weight:600;padding:.6rem 0;border-bottom:1px solid var(--border);}
+
 /* HERO */
-.hero{background:linear-gradient(135deg,var(--primary) 0%,#0f2347 60%,#1a3a6b 100%);padding:5rem 5% 4rem;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,165,0,.12) 0%,transparent 70%);pointer-events:none;}
-.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2;}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.4);padding:.35rem 1rem;border-radius:50px;font-size:.8rem;color:var(--accent);font-weight:700;margin-bottom:1.5rem;}
-.hero h1{font-family:'Cairo',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.25;margin-bottom:1.2rem;}
-.hero h1 .gold{color:var(--accent);}
-.hero p{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.9;margin-bottom:2rem;}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
-.btn-gold{background:linear-gradient(135deg,var(--accent),#d4920a);color:#1a1a1a;padding:.85rem 2rem;border-radius:50px;font-weight:800;font-size:.95rem;text-decoration:none;box-shadow:0 6px 25px rgba(240,165,0,.35);transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;}
-.btn-gold:hover{transform:translateY(-3px);}
-.btn-outline-white{border:2px solid rgba(255,255,255,.3);color:#fff;padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s;}
-.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.08);}
-.hero-visual{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:2rem;backdrop-filter:blur(10px);}
-.hero-visual h3{color:var(--accent);font-size:1rem;font-weight:700;margin-bottom:1.2rem;}
-.service-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:.5rem 1rem;border-radius:50px;color:#fff;font-size:.85rem;margin:.3rem .2rem;}
-.free-badge{margin-top:1.5rem;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.8rem;color:#6ee7b7;font-size:.88rem;font-weight:600;}
+.hero{min-height:100vh;display:flex;align-items:center;padding:5rem 5% 3rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.15;animation:float 8s ease-in-out infinite;}
+.orb1{width:600px;height:600px;background:var(--neon2);top:-150px;right:-100px;}
+.orb2{width:500px;height:500px;background:var(--neon);bottom:-150px;left:-100px;animation-delay:-4s;}
+.orb3{width:300px;height:300px;background:var(--neon3);top:50%;left:40%;animation-delay:-2s;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-30px);}}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,196,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,196,0.04) 1px,transparent 1px);background-size:60px 60px;}
+
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2;width:100%;}
+
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.3);padding:.35rem 1rem;border-radius:50px;font-size:.78rem;color:var(--neon);font-weight:700;margin-bottom:1.5rem;animation:fadeDown .8s ease both;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--neon);border-radius:50%;animation:blink 1.5s infinite;}
+
+.hero h1{font-family:'Cairo',sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:900;line-height:1.15;margin-bottom:1.2rem;animation:fadeDown .8s .1s ease both;}
+.hero h1 .g1{background:linear-gradient(135deg,var(--neon),#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero h1 .g2{background:linear-gradient(135deg,var(--neon3),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+.hero p{color:var(--muted);font-size:1rem;line-height:1.9;margin-bottom:2rem;animation:fadeDown .8s .2s ease both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeDown .8s .3s ease both;}
+.btn-neon{background:linear-gradient(135deg,var(--neon2),var(--neon));color:#000;padding:.85rem 2rem;border-radius:50px;font-weight:800;font-size:.95rem;text-decoration:none;box-shadow:0 0 30px rgba(0,245,196,0.3);transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;}
+.btn-neon:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,245,196,0.5);}
+.btn-ghost{border:1.5px solid rgba(0,245,196,0.3);color:var(--neon);padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s;}
+.btn-ghost:hover{border-color:var(--neon);background:rgba(0,245,196,0.08);transform:translateY(-3px);}
+
+/* HERO CARD */
+.hero-card{background:rgba(13,31,58,0.8);border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(10px);animation:fadeDown .8s .4s ease both;box-shadow:0 0 40px rgba(0,245,196,0.05);}
+.hero-card h3{color:var(--neon);font-size:.9rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;}
+.pill{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:.45rem .9rem;border-radius:50px;color:var(--text);font-size:.8rem;margin:.25rem .2rem;transition:all .3s;cursor:default;}
+.pill:hover{border-color:var(--neon);color:var(--neon);background:rgba(0,245,196,0.06);}
+.hero-free{margin-top:1.3rem;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:12px;padding:.9rem 1.1rem;color:#6ee7b7;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:.7rem;}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+
 /* STATS */
-.stats-bar{background:#fff;padding:2rem 5%;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 5%;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap;}
 .stat{text-align:center;}
-.stat-num{font-family:'Cairo',sans-serif;font-size:2rem;font-weight:900;color:var(--primary);}
-.stat-label{color:var(--muted);font-size:.82rem;margin-top:.2rem;}
+.stat-num{font-family:'Cairo',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--neon),#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-label{color:var(--muted);font-size:.8rem;margin-top:.2rem;}
+
 /* SECTION */
 .section{padding:5rem 5%;}
-.section-center{text-align:center;}
 .max-w{max-width:1100px;margin:0 auto;}
-.sec-tag{display:inline-block;background:var(--accent2);color:var(--primary);font-size:.78rem;font-weight:700;letter-spacing:2px;padding:.3rem 1rem;border-radius:50px;margin-bottom:1rem;text-transform:uppercase;}
-h2.sec-title{font-family:'Cairo',sans-serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;color:var(--primary);margin-bottom:.8rem;}
-.sec-desc{color:var(--muted);font-size:.98rem;line-height:1.8;max-width:550px;margin:0 auto 3rem;}
+.sec-center{text-align:center;}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.2);color:var(--neon);font-size:.75rem;font-weight:700;letter-spacing:2px;padding:.3rem 1rem;border-radius:50px;margin-bottom:1rem;text-transform:uppercase;}
+h2.sec-title{font-family:'Cairo',sans-serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;margin-bottom:.8rem;}
+h2.sec-title .hl{background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-desc{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:540px;margin:0 auto 3rem;}
+
 /* SERVICES */
-.services-bg{background:#fff;}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
-.srv-card{border:1.5px solid var(--border);border-radius:18px;padding:2rem 1.7rem;transition:all .35s;cursor:pointer;position:relative;overflow:hidden;background:#fff;}
-.srv-card::after{content:'اضغط لتقديم الطلب ←';position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;font-size:.8rem;font-weight:700;text-align:center;padding:.6rem;transform:translateY(100%);transition:transform .3s;}
-.srv-card:hover{border-color:var(--primary);transform:translateY(-5px);box-shadow:0 15px 45px rgba(26,58,107,.12);}
+.services-bg{background:var(--surface);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.3rem;}
+.srv-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem;cursor:pointer;position:relative;overflow:hidden;transition:all .35s;}
+.srv-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,245,196,0.04),transparent);opacity:0;transition:.35s;}
+.srv-card::after{content:'اضغط لتقديم الطلب →';position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,var(--neon2),var(--neon));color:#000;font-size:.78rem;font-weight:800;text-align:center;padding:.55rem;transform:translateY(100%);transition:.3s;}
+.srv-card:hover{border-color:var(--neon);transform:translateY(-5px);box-shadow:0 0 30px rgba(0,245,196,0.12);}
+.srv-card:hover::before{opacity:1;}
 .srv-card:hover::after{transform:translateY(0);}
-.srv-icon{width:54px;height:54px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;}
-.srv-card h3{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:.6rem;}
-.srv-card p{color:var(--muted);font-size:.88rem;line-height:1.7;}
+.srv-icon{width:52px;height:52px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;}
+.ic1{background:linear-gradient(135deg,rgba(0,245,196,0.15),rgba(0,245,196,0.05));border:1px solid rgba(0,245,196,0.2);}
+.ic2{background:linear-gradient(135deg,rgba(123,47,255,0.15),rgba(123,47,255,0.05));border:1px solid rgba(123,47,255,0.2);}
+.ic3{background:linear-gradient(135deg,rgba(255,45,120,0.15),rgba(255,45,120,0.05));border:1px solid rgba(255,45,120,0.2);}
+.ic4{background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,215,0,0.05));border:1px solid rgba(255,215,0,0.2);}
+.ic5{background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(59,130,246,0.05));border:1px solid rgba(59,130,246,0.2);}
+.ic6{background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(16,185,129,0.05));border:1px solid rgba(16,185,129,0.2);}
+.srv-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem;}
+.srv-card p{color:var(--muted);font-size:.85rem;line-height:1.7;}
+.srv-price{display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.25);color:var(--gold);font-size:.75rem;font-weight:700;padding:.2rem .7rem;border-radius:50px;margin-top:.8rem;}
+.srv-time{color:var(--neon);font-size:.75rem;font-weight:600;margin-top:.4rem;display:flex;align-items:center;gap:.3rem;}
+
 /* SPECIALTIES */
-.specialties-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;}
-.spec-item{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:1.4rem 1rem;text-align:center;transition:all .3s;cursor:pointer;}
-.spec-item:hover{border-color:var(--primary);box-shadow:0 8px 25px rgba(26,58,107,.12);transform:translateY(-4px);background:var(--primary);}
-.spec-item:hover .icon,.spec-item:hover .spec-name{color:#fff;}
-.spec-item .icon{font-size:1.8rem;margin-bottom:.5rem;display:block;transition:.3s;}
-.spec-item .spec-name{display:block;font-size:.88rem;font-weight:700;color:var(--primary);transition:.3s;}
-.spec-item .click-hint{font-size:.7rem;color:var(--muted);margin-top:.3rem;transition:.3s;}
-.spec-item:hover .click-hint{color:rgba(255,255,255,.7);}
-/* PAYMENT */
-.payment-bg{background:#fff;}
-.payment-cards{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;}
-.pay-card{background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:2rem 2.5rem;text-align:center;min-width:180px;transition:all .3s;}
-.pay-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 35px rgba(240,165,0,.15);}
-.pay-icon{font-size:2.5rem;margin-bottom:.8rem;}
-.pay-card h4{font-weight:800;font-size:1rem;color:var(--primary);margin-bottom:.3rem;}
-.pay-card p{font-size:.8rem;color:var(--muted);}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;}
+.spec-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1rem;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.spec-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--neon2),var(--neon));opacity:0;transition:.3s;}
+.spec-item:hover{transform:translateY(-5px);box-shadow:0 0 25px rgba(0,245,196,0.15);}
+.spec-item:hover::before{opacity:1;}
+.spec-item:hover .spec-icon,.spec-item:hover .spec-name,.spec-item:hover .spec-hint{position:relative;z-index:1;color:#000!important;}
+.spec-icon{font-size:1.7rem;margin-bottom:.5rem;display:block;}
+.spec-name{display:block;font-size:.85rem;font-weight:700;color:var(--text);}
+.spec-hint{display:block;font-size:.68rem;color:var(--muted);margin-top:.25rem;}
+
+/* PRICES */
+.prices-bg{background:var(--surface);}
+.prices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.3rem;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem;text-align:center;transition:all .3s;position:relative;overflow:hidden;}
+.price-card.featured{border-color:var(--neon);box-shadow:0 0 30px rgba(0,245,196,0.15);}
+.price-card.featured::before{content:'⭐ الأكثر طلباً';position:absolute;top:1rem;right:1rem;background:var(--neon);color:#000;font-size:.68rem;font-weight:800;padding:.2rem .7rem;border-radius:50px;}
+.price-card:hover{transform:translateY(-5px);border-color:var(--neon);box-shadow:0 0 25px rgba(0,245,196,0.1);}
+.price-icon{font-size:2rem;margin-bottom:.8rem;}
+.price-card h4{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
+.price-amount{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:.5rem 0;}
+.price-amount span{font-size:.9rem;font-weight:600;}
+.price-note{color:var(--muted);font-size:.78rem;line-height:1.6;}
+.price-features{list-style:none;margin-top:1rem;text-align:right;}
+.price-features li{color:var(--muted);font-size:.8rem;padding:.3rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.4rem;}
+.price-features li::before{content:'✓';color:var(--neon);font-weight:700;flex-shrink:0;}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:.8rem;max-width:750px;margin:0 auto;}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .3s;}
+.faq-item.open{border-color:var(--neon);}
+.faq-q{padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.95rem;user-select:none;}
+.faq-q .arr{color:var(--neon);font-size:1.2rem;transition:transform .3s;flex-shrink:0;}
+.faq-item.open .arr{transform:rotate(45deg);}
+.faq-a{padding:0 1.5rem;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;color:var(--muted);font-size:.9rem;line-height:1.8;}
+.faq-item.open .faq-a{max-height:200px;padding:0 1.5rem 1.2rem;}
+
 /* DELIVERY */
-.delivery-box{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:24px;padding:3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;color:#fff;}
-.delivery-box h2{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900;margin-bottom:1rem;color:#fff;}
-.delivery-box>div>p{color:rgba(255,255,255,.8);line-height:1.8;font-size:.97rem;}
-.delivery-features{display:flex;flex-direction:column;gap:1rem;}
-.delivery-feat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:1rem 1.3rem;display:flex;align-items:center;gap:1rem;}
-.feat-icon{font-size:1.5rem;flex-shrink:0;}
-.delivery-feat h4{font-weight:700;font-size:.95rem;}
-.delivery-feat p{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:.2rem;}
+.delivery-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;box-shadow:0 0 60px rgba(0,245,196,0.04);}
+.delivery-box h2{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900;margin-bottom:1rem;}
+.delivery-box p{color:var(--muted);line-height:1.9;font-size:.95rem;}
+.delivery-feats{display:flex;flex-direction:column;gap:.9rem;}
+.d-feat{background:rgba(0,245,196,0.04);border:1px solid rgba(0,245,196,0.1);border-radius:12px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;}
+.d-feat:hover{border-color:var(--neon);background:rgba(0,245,196,0.07);}
+.d-icon{font-size:1.4rem;flex-shrink:0;}
+.d-feat h4{font-size:.9rem;font-weight:700;}
+.d-feat p{color:var(--muted);font-size:.78rem;margin-top:.1rem;}
+
+/* PAYMENT */
+.pay-bg{background:var(--surface);}
+.pay-cards{display:flex;justify-content:center;gap:1.3rem;flex-wrap:wrap;}
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2rem 2.5rem;text-align:center;min-width:175px;transition:all .3s;cursor:default;}
+.pay-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 0 25px rgba(255,215,0,0.12);}
+.pay-icon{font-size:2.3rem;margin-bottom:.7rem;}
+.pay-card h4{font-weight:800;font-size:.95rem;color:var(--text);margin-bottom:.3rem;}
+.pay-card p{color:var(--muted);font-size:.78rem;}
+
 /* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
-.contact-info{background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:24px;padding:3rem 2.5rem;color:#fff;}
-.contact-info h3{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:.5rem;}
-.contact-info>p{color:rgba(255,255,255,.7);margin-bottom:2rem;font-size:.9rem;}
-.contact-item{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;background:rgba(255,255,255,.08);border-radius:14px;padding:1rem 1.2rem;text-decoration:none;color:#fff;transition:all .3s;}
-.contact-item:hover{background:rgba(240,165,0,.2);}
-.ci-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
-.ci-tg{background:rgba(41,182,246,.2);}
-.ci-wa{background:rgba(37,211,102,.2);}
-.contact-item h4{font-size:.85rem;color:rgba(255,255,255,.6);font-weight:500;}
-.contact-item p{font-size:1rem;font-weight:700;margin:0;}
-.manager-box{margin-top:1.5rem;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem;}
-.manager-box>span{font-size:1.5rem;}
-.manager-box h4{font-size:.8rem;color:rgba(255,255,255,.6);}
-.manager-box p{color:var(--accent);font-weight:700;font-size:.95rem;margin:0;}
-.contact-form-box{background:#fff;border-radius:24px;padding:2.5rem;box-shadow:0 4px 30px rgba(0,0,0,.06);border:1.5px solid var(--border);}
-.contact-form-box h3{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900;color:var(--primary);margin-bottom:.4rem;}
-.contact-form-box>p{color:var(--muted);font-size:.87rem;margin-bottom:1.8rem;}
-.form-group{margin-bottom:1.2rem;}
-.form-group label{display:block;font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Tajawal',sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none;transition:border-color .2s;}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);background:#fff;}
-.form-group textarea{resize:vertical;min-height:100px;}
-.submit-btn{width:100%;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;padding:.95rem;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(26,58,107,.3);}
-.submit-btn:hover{transform:translateY(-2px);}
+.contact-info{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.5rem;}
+.contact-info h3{font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:900;margin-bottom:.4rem;}
+.contact-info>p{color:var(--muted);font-size:.88rem;margin-bottom:1.8rem;}
+.c-item{display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem;border-radius:12px;text-decoration:none;color:var(--text);transition:all .3s;margin-bottom:.8rem;border:1px solid var(--border);}
+.c-item:hover{border-color:var(--neon);background:rgba(0,245,196,0.04);}
+.c-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.c-tg{background:rgba(41,182,246,0.1);border:1px solid rgba(41,182,246,0.2);}
+.c-wa{background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);}
+.c-item h4{font-size:.78rem;color:var(--muted);font-weight:500;}
+.c-item p{font-weight:700;font-size:.95rem;margin:0;}
+.manager-box{margin-top:1.2rem;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem;}
+.manager-box h4{font-size:.75rem;color:var(--muted);}
+.manager-box p{color:var(--gold);font-weight:700;font-size:.92rem;margin:0;}
+
+.form-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.5rem;}
+.form-box h3{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:.3rem;}
+.form-box>p{color:var(--muted);font-size:.85rem;margin-bottom:1.8rem;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
+.fg input,.fg select,.fg textarea{width:100%;padding:.75rem 1rem;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:'Tajawal',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--neon);box-shadow:0 0 10px rgba(0,245,196,0.1);}
+.fg select option{background:var(--surface);}
+.fg textarea{resize:vertical;min-height:90px;}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--neon2),var(--neon));color:#000;padding:.9rem;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 0 25px rgba(0,245,196,0.2);}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,245,196,0.35);}
+
 /* FOOTER */
-footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
-.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.08);}
-.footer-brand .logo-text{color:#fff;}
-.footer-brand p{font-size:.87rem;line-height:1.8;margin-top:1rem;max-width:280px;}
-.footer-col h4{color:#fff;font-weight:700;margin-bottom:1rem;font-size:.95rem;}
+footer{background:#020810;border-top:1px solid var(--border);padding:3rem 5% 1.5rem;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
+.footer-brand .logo-text{color:var(--text);}
+.footer-brand p{color:var(--muted);font-size:.83rem;line-height:1.8;margin-top:.8rem;max-width:270px;}
+.footer-col h4{color:var(--neon);font-weight:700;margin-bottom:1rem;font-size:.88rem;letter-spacing:1px;}
 .footer-col ul{list-style:none;}
-.footer-col ul li{margin-bottom:.6rem;font-size:.85rem;}
-.footer-col ul li a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;}
-.footer-col ul li a:hover{color:var(--accent);}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;}
-.footer-bottom span{color:var(--accent);}
+.footer-col li{margin-bottom:.5rem;font-size:.82rem;}
+.footer-col a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:var(--neon);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--muted);}
+.footer-bottom span{color:var(--neon);}
+
 /* WA FLOAT */
-.wa-float{position:fixed;bottom:1.5rem;left:1.5rem;width:58px;height:58px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;text-decoration:none;box-shadow:0 6px 25px rgba(37,211,102,.45);z-index:999;transition:all .3s;animation:waBounce 2s infinite;}
-.wa-float:hover{transform:scale(1.1);}
-@keyframes waBounce{0%,100%{box-shadow:0 6px 25px rgba(37,211,102,.45);}50%{box-shadow:0 8px 35px rgba(37,211,102,.7);}}
-/* ═══ MODAL ═══ */
-.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,26,53,.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.wa-float{position:fixed;bottom:1.5rem;left:1.5rem;width:56px;height:56px;background:linear-gradient(135deg,#25d366,#1da851);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 0 25px rgba(37,211,102,0.4);z-index:9990;transition:all .3s;animation:waPulse 2.5s infinite;}
+.wa-float:hover{transform:scale(1.12);}
+@keyframes waPulse{0%,100%{box-shadow:0 0 25px rgba(37,211,102,0.4);}50%{box-shadow:0 0 45px rgba(37,211,102,0.65);}}
+
+/* TG FLOAT */
+.tg-float{position:fixed;bottom:5rem;left:1.5rem;width:56px;height:56px;background:linear-gradient(135deg,#29b6f6,#0288d1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;box-shadow:0 0 25px rgba(41,182,246,0.4);z-index:9990;transition:all .3s;}
+.tg-float:hover{transform:scale(1.12);box-shadow:0 0 40px rgba(41,182,246,0.6);}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(2,8,16,0.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:#fff;border-radius:24px;width:100%;max-width:530px;max-height:92vh;overflow-y:auto;transform:translateY(30px) scale(.97);transition:transform .35s cubic-bezier(.34,1.56,.64,1);position:relative;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:22px;width:100%;max-width:530px;max-height:92vh;overflow-y:auto;transform:translateY(30px) scale(.97);transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
 .modal-overlay.open .modal{transform:translateY(0) scale(1);}
-.modal-header{background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:1.8rem 2rem 1.4rem;border-radius:24px 24px 0 0;color:#fff;position:relative;}
-.modal-icon{font-size:2.2rem;margin-bottom:.5rem;}
-.modal-header h3{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900;}
-.modal-header p{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:.2rem;}
-.modal-close{position:absolute;top:1rem;left:1rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.modal-close:hover{background:rgba(255,255,255,.25);}
-.college-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);padding:.25rem .8rem;border-radius:50px;font-size:.78rem;color:var(--accent);font-weight:700;margin-top:.6rem;}
-.modal-body{padding:1.8rem 2rem;}
-.srv-select-label{font-size:.85rem;font-weight:700;color:var(--text);display:block;margin-bottom:.7rem;}
-.modal-services{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.5rem;}
-.msrv-btn{border:1.5px solid var(--border);border-radius:10px;padding:.65rem .5rem;text-align:center;cursor:pointer;transition:all .2s;font-family:'Tajawal',sans-serif;font-size:.78rem;font-weight:700;color:var(--text);background:var(--bg);}
-.msrv-btn .ms-icon{font-size:1.1rem;display:block;margin-bottom:.2rem;}
-.msrv-btn:hover,.msrv-btn.active{border-color:var(--primary);background:var(--primary);color:#fff;}
-.modal .form-group label{font-size:.82rem;}
-.modal .form-group input,.modal .form-group select,.modal .form-group textarea{font-size:.88rem;padding:.7rem .9rem;}
-.modal .form-group textarea{min-height:80px;}
-.modal-submit{width:100%;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:.9rem;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(37,211,102,.35);display:flex;align-items:center;justify-content:center;gap:.5rem;}
-.modal-submit:hover{transform:translateY(-2px);}
-/* FADE */
-.fade-in{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease;}
+.modal-header{background:linear-gradient(135deg,var(--neon2),var(--neon));padding:1.7rem 2rem 1.3rem;border-radius:22px 22px 0 0;color:#000;position:relative;}
+.modal-header h3{font-family:'Cairo',sans-serif;font-size:1.25rem;font-weight:900;}
+.modal-header p{font-size:.82rem;opacity:.75;margin-top:.2rem;}
+.modal-close{position:absolute;top:.9rem;left:1rem;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.15);border:none;color:#000;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.modal-close:hover{background:rgba(0,0,0,0.25);}
+.modal-icon-big{font-size:2rem;margin-bottom:.4rem;display:block;}
+.spec-banner{display:none;background:rgba(255,215,0,0.08);border-bottom:1px solid rgba(255,215,0,0.2);padding:.8rem 2rem;align-items:center;gap:.7rem;}
+.spec-banner.show{display:flex;}
+.spec-banner-icon{font-size:1.3rem;}
+.spec-banner-txt{font-size:.82rem;font-weight:700;color:var(--gold);}
+.spec-banner-label{font-size:.7rem;color:var(--muted);display:block;}
+.modal-body{padding:1.6rem 2rem;}
+.srv-label{font-size:.82rem;font-weight:700;color:var(--text);display:block;margin-bottom:.65rem;}
+.modal-srvs{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-bottom:1.4rem;}
+.ms-btn{border:1.5px solid var(--border);border-radius:9px;padding:.6rem .4rem;text-align:center;cursor:pointer;transition:all .2s;font-family:'Tajawal',sans-serif;font-size:.75rem;font-weight:700;color:var(--muted);background:var(--card);}
+.ms-btn .ms-ic{font-size:1rem;display:block;margin-bottom:.2rem;}
+.ms-btn:hover,.ms-btn.active{border-color:var(--neon);background:rgba(0,245,196,0.08);color:var(--neon);}
+.modal-submit{width:100%;background:linear-gradient(135deg,#25d366,#1da851);color:#000;padding:.9rem;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 0 20px rgba(37,211,102,0.2);display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1rem;}
+.modal-submit:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(37,211,102,0.4);}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity .65s ease,transform .65s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
+
 /* RESPONSIVE */
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-visual{display:none;}.contact-grid{grid-template-columns:1fr;}.delivery-box{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr 1fr;}}
-@media(max-width:680px){.nav-links{display:none;}.hamburger{display:flex;}.stats-bar{gap:2rem;}.footer-top{grid-template-columns:1fr;gap:2rem;}.topbar{font-size:.75rem;}.footer-bottom{flex-direction:column;text-align:center;}.modal-services{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-card{display:none;}.contact-grid{grid-template-columns:1fr;}.delivery-box{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){.nav-links{display:none;}.hamburger{display:flex;}.stats-bar{gap:2.5rem;}.footer-top{grid-template-columns:1fr;}.modal-srvs{grid-template-columns:repeat(2,1fr);}.footer-bottom{flex-direction:column;text-align:center;}}
 </style>
 </head>
 <body>
 
+<!-- FLOATS -->
 <a href="https://wa.me/9647749951234" class="wa-float" target="_blank">💬</a>
+<a href="https://t.me/kennybbx" class="tg-float" target="_blank">✈️</a>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeOutside(event)">
-  <div class="modal" id="modalBox">
+<div class="modal-overlay" id="modalOverlay" onclick="closeOut(event)">
+  <div class="modal">
     <div class="modal-header">
       <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-icon" id="mIcon">📄</div>
+      <span class="modal-icon-big" id="mIcon">📄</span>
       <h3 id="mTitle">تقديم طلب</h3>
       <p id="mSub">اختر الخدمة وأرسل طلبك مباشرة</p>
     </div>
-    <!-- SPECIALTY BANNER (shown only when coming from specialty) -->
-    <div id="specBanner" style="display:none;background:#fff7e6;border-bottom:2px solid #f0a500;padding:.9rem 2rem;display:flex;align-items:center;gap:.7rem;">
-      <span style="font-size:1.4rem" id="specBannerIcon">🎓</span>
-      <div>
-        <div style="font-size:.72rem;color:#92700a;font-weight:700;text-transform:uppercase;letter-spacing:1px;">التخصص المحدد</div>
-        <div id="specBannerText" style="font-size:.95rem;font-weight:800;color:#7a5c00;"></div>
-      </div>
+    <div class="spec-banner" id="specBanner">
+      <span class="spec-banner-icon" id="specBIcon">🎓</span>
+      <div><span class="spec-banner-label">التخصص المحدد</span><div class="spec-banner-txt" id="specBTxt"></div></div>
     </div>
     <div class="modal-body">
-      <span class="srv-select-label">🔹 اختر نوع الخدمة المطلوبة</span>
-      <div class="modal-services">
-        <div class="msrv-btn active" data-srv="بحث جامعي" onclick="pickSrv(this)"><span class="ms-icon">📄</span>بحث جامعي</div>
-        <div class="msrv-btn" data-srv="تقرير طلابي" onclick="pickSrv(this)"><span class="ms-icon">📊</span>تقرير طلابي</div>
-        <div class="msrv-btn" data-srv="هوم وورك" onclick="pickSrv(this)"><span class="ms-icon">🏠</span>هوم وورك</div>
-        <div class="msrv-btn" data-srv="ملزمة دراسية" onclick="pickSrv(this)"><span class="ms-icon">📋</span>ملزمة دراسية</div>
-        <div class="msrv-btn" data-srv="نسخ وطباعة" onclick="pickSrv(this)"><span class="ms-icon">🖨️</span>نسخ وطباعة</div>
-        <div class="msrv-btn" data-srv="تنضيد ملف" onclick="pickSrv(this)"><span class="ms-icon">✍️</span>تنضيد ملف</div>
+      <span class="srv-label">🔹 نوع الخدمة المطلوبة</span>
+      <div class="modal-srvs">
+        <div class="ms-btn active" data-srv="بحث جامعي" onclick="pickSrv(this)"><span class="ms-ic">📄</span>بحث جامعي</div>
+        <div class="ms-btn" data-srv="تقرير طلابي" onclick="pickSrv(this)"><span class="ms-ic">📊</span>تقرير طلابي</div>
+        <div class="ms-btn" data-srv="هوم وورك" onclick="pickSrv(this)"><span class="ms-ic">🏠</span>هوم وورك</div>
+        <div class="ms-btn" data-srv="ملزمة دراسية" onclick="pickSrv(this)"><span class="ms-ic">📋</span>ملزمة دراسية</div>
+        <div class="ms-btn" data-srv="نسخ وطباعة" onclick="pickSrv(this)"><span class="ms-ic">🖨️</span>نسخ وطباعة</div>
+        <div class="ms-btn" data-srv="تنضيد ملف" onclick="pickSrv(this)"><span class="ms-ic">✍️</span>تنضيد ملف</div>
       </div>
-      <div class="form-group"><label>الاسم الكريم</label><input id="fName" type="text" placeholder="مثال: علي حسن"></div>
-      <div class="form-group"><label>رقم الهاتف / واتساب</label><input id="fPhone" type="tel" placeholder="07xx xxx xxxx"></div>
-      <div class="form-group"><label>الكلية / القسم</label><input id="fCollege" type="text" placeholder="مثال: كلية الهندسة / قسم المدني"></div>
-      <div class="form-group"><label>المادة أو عنوان البحث</label><input id="fSubject" type="text" placeholder="مثال: بحث في ميكانيك التربة"></div>
-      <div class="form-group"><label>موعد التسليم المطلوب</label><input id="fDeadline" type="text" placeholder="مثال: بعد يومين / يوم الخميس"></div>
-      <div class="form-group"><label>تفاصيل إضافية (اختياري)</label><textarea id="fDetails" placeholder="أي تفاصيل تساعدنا على تقديم أفضل خدمة..."></textarea></div>
+      <div class="fg"><label>الاسم الكريم *</label><input id="fName" type="text" placeholder="مثال: علي حسن"></div>
+      <div class="fg"><label>رقم الهاتف / واتساب</label><input id="fPhone" type="tel" placeholder="07xx xxx xxxx"></div>
+      <div class="fg"><label>الكلية / القسم</label><input id="fCollege" type="text" placeholder="مثال: كلية الهندسة — المدني"></div>
+      <div class="fg"><label>المادة أو عنوان البحث</label><input id="fSubject" type="text" placeholder="مثال: بحث في ميكانيك التربة"></div>
+      <div class="fg"><label>موعد التسليم</label><input id="fDeadline" type="text" placeholder="مثال: بعد يومين / يوم الخميس"></div>
+      <div class="fg"><label>تفاصيل إضافية (اختياري)</label><textarea id="fDetails" placeholder="أي تفاصيل تساعدنا على تقديم أفضل خدمة..."></textarea></div>
       <button class="modal-submit" onclick="sendWA()">📩 إرسال الطلب عبر واتساب</button>
     </div>
   </div>
 </div>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
-  <span>📍 خدماتنا تشمل جميع محافظات العراق | التوصيل مجاني داخل العزيزية</span>
-  <span>📞 <a href="https://wa.me/9647749951234">07749951234</a> | <a href="https://t.me/kennybbx">@kennybbx</a></span>
+  <span class="live">شغّال الآن • خدمة متواصلة</span>
+  <span>📍 العزيزية — العراق | توصيل لجميع المحافظات</span>
+  <span>📞 <a href="https://wa.me/9647749951234">07749951234</a> &nbsp;|&nbsp; <a href="https://t.me/kennybbx">@kennybbx</a></span>
 </div>
 
 <!-- NAV -->
 <nav>
   <div class="logo-wrap">
     <div class="logo-icon">📚</div>
-    <div class="logo-text">المكتبة الطلابية<span>بحوث • تقارير • ملازم</span></div>
+    <div class="logo-text"><span class="neon">المكتبة</span> الطلابية<span>بحوث • تقارير • ملازم</span></div>
   </div>
   <ul class="nav-links">
-    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#services">الخدمات</a></li>
     <li><a href="#specialties">التخصصات</a></li>
-    <li><a href="#delivery">التوصيل</a></li>
-    <li><a href="#payment">الدفع</a></li>
-    <li><a href="#contact" class="contact-btn">تواصل معنا</a></li>
+    <li><a href="#prices">الأسعار</a></li>
+    <li><a href="#faq">الأسئلة</a></li>
+    <li><a href="#contact" class="nav-cta">اطلب الآن</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#services" onclick="toggleMenu()">خدماتنا</a>
+  <a href="#services" onclick="toggleMenu()">الخدمات</a>
   <a href="#specialties" onclick="toggleMenu()">التخصصات</a>
-  <a href="#delivery" onclick="toggleMenu()">التوصيل</a>
-  <a href="#payment" onclick="toggleMenu()">الدفع</a>
+  <a href="#prices" onclick="toggleMenu()">الأسعار</a>
+  <a href="#faq" onclick="toggleMenu()">الأسئلة الشائعة</a>
   <a href="#contact" onclick="toggleMenu()">تواصل معنا</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner max-w">
+  <div class="hero-bg">
+    <div class="grid-lines"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-inner">
     <div>
-      <div class="hero-badge">🎓 الخيار الأول للطلاب</div>
-      <h1>المكتبة الطلابية<br><span class="gold">خدمات أكاديمية متكاملة</span></h1>
-      <p>نقدم خدمات أكاديمية احترافية لطلاب الجامعات والمدارس — بحوث، تقارير، ملازم، واجبات، ونسخ وطباعة. نخدم جميع التخصصات ونوصل لكل محافظات العراق.</p>
+      <div class="hero-badge">🎓 الخيار الأول للطلاب في العراق</div>
+      <h1>
+        <span class="g1">المكتبة الطلابية</span><br>
+        خدمات أكاديمية<br>
+        <span class="g2">بجودة لا تُنافَس</span>
+      </h1>
+      <p>بحوث جامعية • تقارير • ملازم • هوم ووركات • نسخ وطباعة<br>نخدم جميع التخصصات ونوصل لكل محافظات العراق 🇮🇶</p>
       <div class="hero-btns">
-        <a href="https://t.me/kennybbx" class="btn-gold" target="_blank">📩 تواصل الآن</a>
-        <a href="#services" class="btn-outline-white">تعرف على خدماتنا</a>
+        <a href="#services" class="btn-neon">🚀 اطلب الآن</a>
+        <a href="#prices" class="btn-ghost">💰 شوف الأسعار</a>
       </div>
     </div>
-    <div class="hero-visual">
-      <h3>🗂️ خدماتنا الأكاديمية</h3>
+    <div class="hero-card">
+      <h3>⚡ خدماتنا الأكاديمية</h3>
       <div>
-        <span class="service-pill">📄 بحوث جامعية</span>
-        <span class="service-pill">📊 تقارير طلابية</span>
-        <span class="service-pill">📝 هوم ووركات</span>
-        <span class="service-pill">📋 ملازم دراسية</span>
-        <span class="service-pill">🖨️ نسخ وطباعة</span>
-        <span class="service-pill">🚚 توصيل سريع</span>
+        <span class="pill">📄 بحوث جامعية</span>
+        <span class="pill">📊 تقارير طلابية</span>
+        <span class="pill">📝 هوم ووركات</span>
+        <span class="pill">📋 ملازم دراسية</span>
+        <span class="pill">🖨️ نسخ وطباعة</span>
+        <span class="pill">✍️ تنضيد نصوص</span>
+        <span class="pill">🚚 توصيل سريع</span>
+        <span class="pill">💳 دفع متعدد</span>
       </div>
-      <div class="free-badge">✅ التوصيل مجاني داخل العزيزية — ونخدم جميع محافظات العراق!</div>
+      <div class="hero-free">✅ توصيل مجاني داخل العزيزية — ونخدم جميع محافظات العراق!</div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat fade-in"><div class="stat-num">500+</div><div class="stat-label">طالب مستفيد</div></div>
-  <div class="stat fade-in"><div class="stat-num">20+</div><div class="stat-label">تخصص جامعي</div></div>
-  <div class="stat fade-in"><div class="stat-num">18</div><div class="stat-label">محافظة نخدمها</div></div>
-  <div class="stat fade-in"><div class="stat-num">100%</div><div class="stat-label">رضا الطلاب</div></div>
+  <div class="stat fade-in"><div class="stat-num" data-target="500">0</div><div class="stat-label">طالب مستفيد</div></div>
+  <div class="stat fade-in"><div class="stat-num" data-target="20">0</div><div class="stat-label">تخصص جامعي</div></div>
+  <div class="stat fade-in"><div class="stat-num" data-target="18">0</div><div class="stat-label">محافظة نخدمها</div></div>
+  <div class="stat fade-in"><div class="stat-num" data-target="100">0</div><div class="stat-label">% رضا الطلاب</div></div>
 </div>
 
 <!-- SERVICES -->
 <section class="section services-bg" id="services">
   <div class="max-w">
-    <div class="section-center fade-in">
-      <span class="sec-tag">خدماتنا</span>
-      <h2 class="sec-title">كل ما يحتاجه الطالب في مكان واحد</h2>
-      <p class="sec-desc">اضغط على أي خدمة لتقديم طلبك مباشرة 👇</p>
+    <div class="sec-center fade-in">
+      <div class="sec-tag">⚡ خدماتنا</div>
+      <h2 class="sec-title">كل ما يحتاجه الطالب <span class="hl">في مكان واحد</span></h2>
+      <p class="sec-desc">اضغط على أي خدمة لتقديم طلبك مباشرة عبر واتساب 👇</p>
     </div>
     <div class="services-grid">
-      <div class="srv-card fade-in" onclick="openModal('📄','إنشاء وإعداد البحوث الجامعية','بحوث أكاديمية متكاملة بمصادر موثوقة','بحث جامعي')">
-        <div class="srv-icon">📄</div>
+      <div class="srv-card fade-in" onclick="openModal('📄','إنشاء وإعداد البحوث الجامعية','بحوث أكاديمية متكاملة بمصادر موثوقة','بحث جامعي','')">
+        <div class="srv-icon ic1">📄</div>
         <h3>إنشاء وإعداد البحوث الجامعية</h3>
         <p>بحوث أكاديمية متكاملة بمصادر موثوقة ومنهجية علمية سليمة لجميع التخصصات.</p>
+        <div class="srv-price">💰 يبدأ من 5,000 د.ع</div>
+        <div class="srv-time">⏱️ يُسلّم خلال 24-72 ساعة</div>
       </div>
-      <div class="srv-card fade-in" onclick="openModal('📊','تقارير لجميع الأقسام','تقارير دراسية وعلمية لكل الكليات','تقرير طلابي')">
-        <div class="srv-icon">📊</div>
+      <div class="srv-card fade-in" onclick="openModal('📊','تقارير لجميع الأقسام','تقارير دراسية لجميع الكليات','تقرير طلابي','')">
+        <div class="srv-icon ic2">📊</div>
         <h3>تقارير لجميع الأقسام</h3>
-        <p>تقارير دراسية شاملة لكل الكليات بأسلوب واضح ومحتوى دقيق ومنظم.</p>
+        <p>تقارير دراسية شاملة لكل الكليات بأسلوب واضح ومحتوى دقيق ومنظم احترافياً.</p>
+        <div class="srv-price">💰 يبدأ من 3,000 د.ع</div>
+        <div class="srv-time">⏱️ يُسلّم خلال 12-48 ساعة</div>
       </div>
-      <div class="srv-card fade-in" onclick="openModal('🏠','حلول الهوم ووركات','واجبات منزلية كاملة ومشروحة','هوم وورك')">
-        <div class="srv-icon">🏠</div>
+      <div class="srv-card fade-in" onclick="openModal('🏠','حلول الهوم ووركات','واجبات منزلية كاملة ومشروحة','هوم وورك','')">
+        <div class="srv-icon ic3">🏠</div>
         <h3>حلول الهوم ووركات</h3>
-        <p>حلول كاملة ومشروحة للواجبات المنزلية في جميع المواد بأسلوب واضح.</p>
+        <p>حلول كاملة ومشروحة للواجبات المنزلية في جميع المواد بطريقة واضحة ومفهومة.</p>
+        <div class="srv-price">💰 يبدأ من 2,000 د.ع</div>
+        <div class="srv-time">⏱️ يُسلّم خلال 6-24 ساعة</div>
       </div>
-      <div class="srv-card fade-in" onclick="openModal('📋','إنشاء الملازم الدراسية','ملازم منظمة لجميع المواد','ملزمة دراسية')">
-        <div class="srv-icon">📋</div>
+      <div class="srv-card fade-in" onclick="openModal('📋','إنشاء الملازم الدراسية','ملازم منظمة لجميع المواد','ملزمة دراسية','')">
+        <div class="srv-icon ic4">📋</div>
         <h3>إنشاء الملازم الدراسية</h3>
-        <p>ملازم منظمة ومرتبة لجميع المواد الجامعية والمدرسية بتنسيق جميل.</p>
+        <p>ملازم منظمة ومرتبة لجميع المواد الجامعية والمدرسية بخط واضح وتنسيق جميل.</p>
+        <div class="srv-price">💰 يبدأ من 8,000 د.ع</div>
+        <div class="srv-time">⏱️ يُسلّم حسب الاتفاق</div>
       </div>
-      <div class="srv-card fade-in" onclick="openModal('🖨️','استنساخ وطباعة','طباعة واستنساخ بجودة عالية','نسخ وطباعة')">
-        <div class="srv-icon">🖨️</div>
+      <div class="srv-card fade-in" onclick="openModal('🖨️','استنساخ وطباعة','طباعة واستنساخ بجودة عالية','نسخ وطباعة','')">
+        <div class="srv-icon ic5">🖨️</div>
         <h3>استنساخ وطباعة</h3>
-        <p>خدمات طباعة واستنساخ عالية الجودة للمستندات والبحوث بأسعار تنافسية.</p>
+        <p>طباعة واستنساخ عالية الجودة للمستندات والبحوث بأسعار تنافسية وسرعة في التنفيذ.</p>
+        <div class="srv-price">💰 يبدأ من 500 د.ع/صفحة</div>
+        <div class="srv-time">⏱️ جاهز في نفس اليوم</div>
       </div>
-      <div class="srv-card fade-in" onclick="openModal('✍️','تنضيد وتنسيق النصوص','تنسيق احترافي بالمعايير الأكاديمية','تنضيد ملف')">
-        <div class="srv-icon">✍️</div>
+      <div class="srv-card fade-in" onclick="openModal('✍️','تنضيد وتنسيق النصوص','تنسيق احترافي بالمعايير الأكاديمية','تنضيد ملف','')">
+        <div class="srv-icon ic6">✍️</div>
         <h3>تنضيد وتنسيق النصوص</h3>
-        <p>تنضيد احترافي للبحوث والرسائل بحسب المعايير الأكاديمية المطلوبة.</p>
+        <p>تنضيد احترافي للبحوث والرسائل بحسب المعايير الأكاديمية المطلوبة من الجامعة.</p>
+        <div class="srv-price">💰 يبدأ من 2,500 د.ع</div>
+        <div class="srv-time">⏱️ يُسلّم خلال 12-24 ساعة</div>
       </div>
     </div>
   </div>
@@ -315,47 +440,80 @@ footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
 <!-- SPECIALTIES -->
 <section class="section" id="specialties">
   <div class="max-w">
-    <div class="section-center fade-in">
-      <span class="sec-tag">التخصصات</span>
-      <h2 class="sec-title">نخدم جميع الكليات والتخصصات</h2>
-      <p class="sec-desc">اضغط على تخصصك وسيُفتح نموذج الطلب مباشرة 👇</p>
+    <div class="sec-center fade-in">
+      <div class="sec-tag">🎓 التخصصات</div>
+      <h2 class="sec-title">نخدم <span class="hl">جميع الكليات</span> والتخصصات</h2>
+      <p class="sec-desc">اضغط على تخصصك لتقديم طلبك مباشرة — لا نستثني أي كلية!</p>
     </div>
-    <div class="specialties-grid fade-in">
-      <div class="spec-item" onclick="openModal('🏗️','التخصص الهندسي','خدمات أكاديمية للكليات الهندسية بجميع فروعها','بحث جامعي','كلية الهندسة')">
-        <div class="icon">🏗️</div><span class="spec-name">هندسية</span><div class="click-hint">اضغط للطلب</div>
+    <div class="spec-grid fade-in">
+      <div class="spec-item" onclick="openModal('🏗️','طلب خدمة — هندسية','اختر الخدمة وأرسل طلبك','بحث جامعي','الكليات الهندسية')"><span class="spec-icon">🏗️</span><span class="spec-name">هندسية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('⚕️','طلب خدمة — طبية','اختر الخدمة وأرسل طلبك','بحث جامعي','الكليات الطبية والصحية')"><span class="spec-icon">⚕️</span><span class="spec-name">طبية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('🧪','طلب خدمة — علمية','اختر الخدمة وأرسل طلبك','بحث جامعي','كليات العلوم')"><span class="spec-icon">🧪</span><span class="spec-name">علمية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('📐','طلب خدمة — رياضية','اختر الخدمة وأرسل طلبك','هوم وورك','قسم الرياضيات والإحصاء')"><span class="spec-icon">📐</span><span class="spec-name">رياضية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('🎓','طلب خدمة — تربوية','اختر الخدمة وأرسل طلبك','بحث جامعي','كلية التربية وعلم النفس')"><span class="spec-icon">🎓</span><span class="spec-name">تربوية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('⚖️','طلب خدمة — قانونية','اختر الخدمة وأرسل طلبك','بحث جامعي','كلية القانون والحقوق')"><span class="spec-icon">⚖️</span><span class="spec-name">قانونية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('💼','طلب خدمة — إدارية','اختر الخدمة وأرسل طلبك','تقرير طلابي','كلية الإدارة والاقتصاد')"><span class="spec-icon">💼</span><span class="spec-name">إدارية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('🌍','طلب خدمة — إنسانية','اختر الخدمة وأرسل طلبك','بحث جامعي','كليات الآداب والإنسانيات')"><span class="spec-icon">🌍</span><span class="spec-name">إنسانية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('💻','طلب خدمة — معلوماتية','اختر الخدمة وأرسل طلبك','بحث جامعي','كلية الحاسوب والمعلوماتية')"><span class="spec-icon">💻</span><span class="spec-name">معلوماتية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('🎨','طلب خدمة — فنون','اختر الخدمة وأرسل طلبك','بحث جامعي','كلية الفنون الجميلة')"><span class="spec-icon">🎨</span><span class="spec-name">فنون</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('🌱','طلب خدمة — زراعية','اختر الخدمة وأرسل طلبك','بحث جامعي','الكليات الزراعية والبيطرية')"><span class="spec-icon">🌱</span><span class="spec-name">زراعية</span><span class="spec-hint">اضغط للطلب</span></div>
+      <div class="spec-item" onclick="openModal('📚','جميع التخصصات','لا نستثني أي كلية','بحث جامعي','')"><span class="spec-icon">📚</span><span class="spec-name">وجميعها!</span><span class="spec-hint">اضغط للطلب</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICES -->
+<section class="section prices-bg" id="prices">
+  <div class="max-w">
+    <div class="sec-center fade-in">
+      <div class="sec-tag">💰 الأسعار</div>
+      <h2 class="sec-title">أسعار <span class="hl">تناسب الطالب</span></h2>
+      <p class="sec-desc">أسعار تقريبية — السعر الدقيق يُحدد بعد معرفة تفاصيل الطلب</p>
+    </div>
+    <div class="prices-grid fade-in">
+      <div class="price-card">
+        <div class="price-icon">📄</div>
+        <h4>البحث الجامعي</h4>
+        <div class="price-amount">5,000 <span>د.ع+</span></div>
+        <p class="price-note">يعتمد على عدد الصفحات والتخصص</p>
+        <ul class="price-features">
+          <li>مصادر موثوقة ومراجع</li>
+          <li>تنسيق أكاديمي كامل</li>
+          <li>تسليم خلال 24-72 ساعة</li>
+        </ul>
       </div>
-      <div class="spec-item" onclick="openModal('⚕️','التخصص الطبي','خدمات للكليات الطبية والصحية والصيدلانية','بحث جامعي','كلية الطب / الصحة')">
-        <div class="icon">⚕️</div><span class="spec-name">طبية</span><div class="click-hint">اضغط للطلب</div>
+      <div class="price-card featured">
+        <div class="price-icon">🏠</div>
+        <h4>الهوم وورك</h4>
+        <div class="price-amount">2,000 <span>د.ع+</span></div>
+        <p class="price-note">حسب عدد الأسئلة والمادة</p>
+        <ul class="price-features">
+          <li>حلول مشروحة بالتفصيل</li>
+          <li>جميع المواد والتخصصات</li>
+          <li>تسليم خلال 6-24 ساعة</li>
+        </ul>
       </div>
-      <div class="spec-item" onclick="openModal('🧪','التخصص العلمي','بحوث وتقارير علمية في الكيمياء والفيزياء والأحياء','بحث جامعي','كلية العلوم')">
-        <div class="icon">🧪</div><span class="spec-name">علمية</span><div class="click-hint">اضغط للطلب</div>
+      <div class="price-card">
+        <div class="price-icon">📊</div>
+        <h4>التقرير الطلابي</h4>
+        <div class="price-amount">3,000 <span>د.ع+</span></div>
+        <p class="price-note">حسب عدد الصفحات والمادة</p>
+        <ul class="price-features">
+          <li>محتوى دقيق ومنظم</li>
+          <li>لجميع الأقسام والكليات</li>
+          <li>تسليم خلال 12-48 ساعة</li>
+        </ul>
       </div>
-      <div class="spec-item" onclick="openModal('📐','التخصص الرياضي','حلول وبحوث في الرياضيات والإحصاء','هوم وورك','قسم الرياضيات والإحصاء')">
-        <div class="icon">📐</div><span class="spec-name">رياضية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('🎓','التخصص التربوي','خدمات لكليات التربية وعلم النفس','بحث جامعي','كلية التربية')">
-        <div class="icon">🎓</div><span class="spec-name">تربوية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('⚖️','التخصص القانوني','بحوث وتقارير قانونية وحقوقية متخصصة','بحث جامعي','كلية القانون والحقوق')">
-        <div class="icon">⚖️</div><span class="spec-name">قانونية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('💼','التخصص الإداري','خدمات لكليات الإدارة والاقتصاد والمحاسبة','تقرير طلابي','كلية الإدارة والاقتصاد')">
-        <div class="icon">💼</div><span class="spec-name">إدارية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('🌍','التخصصات الإنسانية','خدمات للكليات الإنسانية والآداب والاجتماعية','بحث جامعي','كلية الآداب / العلوم الإنسانية')">
-        <div class="icon">🌍</div><span class="spec-name">إنسانية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('💻','التخصص المعلوماتي','بحوث وتقارير في الحاسوب والبرمجة والشبكات','بحث جامعي','كلية الحاسوب والمعلوماتية')">
-        <div class="icon">💻</div><span class="spec-name">معلوماتية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('🎨','تخصص الفنون','خدمات أكاديمية لكليات الفنون الجميلة','بحث جامعي','كلية الفنون الجميلة')">
-        <div class="icon">🎨</div><span class="spec-name">فنون</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('🌱','التخصص الزراعي','بحوث وتقارير للكليات الزراعية والبيطرية','بحث جامعي','كلية الزراعة / البيطرة')">
-        <div class="icon">🌱</div><span class="spec-name">زراعية</span><div class="click-hint">اضغط للطلب</div>
-      </div>
-      <div class="spec-item" onclick="openModal('📚','جميع التخصصات','لا نستثني أي كلية أو قسم','بحث جامعي','')">
-        <div class="icon">📚</div><span class="spec-name">وجميعها!</span><div class="click-hint">اضغط للطلب</div>
+      <div class="price-card">
+        <div class="price-icon">🖨️</div>
+        <h4>الطباعة والنسخ</h4>
+        <div class="price-amount">500 <span>د.ع/صفحة</span></div>
+        <p class="price-note">أسعار تنافسية للكميات الكبيرة</p>
+        <ul class="price-features">
+          <li>جودة طباعة عالية</li>
+          <li>أبيض وأسود وملون</li>
+          <li>جاهز في نفس اليوم</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -366,27 +524,28 @@ footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
   <div class="max-w">
     <div class="delivery-box fade-in">
       <div>
-        <h2>🚚 التوصيل لباب البيت</h2>
-        <p>نوصل أعمالك مباشرة لعنوانك. التوصيل <strong style="color:var(--accent)">مجاني بالكامل</strong> داخل منطقة العزيزية، ونخدم جميع محافظات العراق عبر شركات الشحن.</p>
+        <h2>🚚 التوصيل <span style="color:var(--neon)">لباب البيت</span></h2>
+        <p>نوصل أعمالك مباشرة لعنوانك بدون أي تعب. التوصيل <strong style="color:var(--neon)">مجاني بالكامل</strong> داخل منطقة العزيزية، ونخدم جميع محافظات العراق عبر شركات الشحن الموثوقة.</p>
       </div>
-      <div class="delivery-features">
-        <div class="delivery-feat"><div class="feat-icon">🏘️</div><div><h4>داخل العزيزية</h4><p>توصيل مجاني لجميع أنحاء العزيزية</p></div></div>
-        <div class="delivery-feat"><div class="feat-icon">🗺️</div><div><h4>جميع المحافظات</h4><p>نوصل لكل محافظات العراق عبر الشحن</p></div></div>
-        <div class="delivery-feat"><div class="feat-icon">⚡</div><div><h4>سرعة التسليم</h4><p>نلتزم بالمواعيد ولا نضيع وقتك</p></div></div>
+      <div class="delivery-feats">
+        <div class="d-feat"><div class="d-icon">🏘️</div><div><h4>داخل العزيزية</h4><p>توصيل مجاني 100% لجميع أنحاء العزيزية</p></div></div>
+        <div class="d-feat"><div class="d-icon">🗺️</div><div><h4>جميع المحافظات العراقية</h4><p>نوصل لكل محافظات العراق عبر شركات الشحن</p></div></div>
+        <div class="d-feat"><div class="d-icon">⚡</div><div><h4>سرعة في التسليم</h4><p>نلتزم بالمواعيد المتفق عليها دون تأخير</p></div></div>
+        <div class="d-feat"><div class="d-icon">📦</div><div><h4>تغليف آمن</h4><p>أعمالك تُسلّم بشكل أنيق وحماية كاملة</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PAYMENT -->
-<section class="section payment-bg" id="payment">
+<section class="section pay-bg" id="payment">
   <div class="max-w">
-    <div class="section-center fade-in">
-      <span class="sec-tag">طرق الدفع</span>
-      <h2 class="sec-title">ادفع بالطريقة اللي تناسبك</h2>
-      <p class="sec-desc">نوفر خيارات دفع متعددة لراحتك</p>
+    <div class="sec-center fade-in">
+      <div class="sec-tag">💳 طرق الدفع</div>
+      <h2 class="sec-title">ادفع <span class="hl">بالطريقة اللي تريحك</span></h2>
+      <p class="sec-desc">نوفر خيارات دفع متعددة لراحتك التامة</p>
     </div>
-    <div class="payment-cards fade-in">
+    <div class="pay-cards fade-in">
       <div class="pay-card"><div class="pay-icon">💵</div><h4>كاش</h4><p>ادفع نقداً عند الاستلام</p></div>
       <div class="pay-card"><div class="pay-icon">💳</div><h4>ماستر كارد</h4><p>دفع إلكتروني آمن</p></div>
       <div class="pay-card"><div class="pay-icon">🪙</div><h4>USDT</h4><p>دفع بالعملات الرقمية</p></div>
@@ -394,35 +553,72 @@ footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="max-w">
+    <div class="sec-center fade-in">
+      <div class="sec-tag">❓ الأسئلة الشائعة</div>
+      <h2 class="sec-title">أسئلة <span class="hl">يسألها الطلاب</span></h2>
+      <p class="sec-desc">إجابات على أكثر الأسئلة شيوعاً</p>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">كم يستغرق إنجاز البحث؟ <span class="arr">+</span></div>
+        <div class="faq-a">يعتمد على حجم البحث وتعقيده. عادةً البحث البسيط يُنجز خلال 24 ساعة، والبحث المتوسط خلال 48-72 ساعة. نحدد لك الوقت الدقيق بعد معرفة التفاصيل.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">هل الأعمال أصلية وخالية من السرقة العلمية؟ <span class="arr">+</span></div>
+        <div class="faq-a">نعم، جميع أعمالنا تُكتب من الصفر خصيصاً لك وليست منسوخة من الإنترنت. نضمن أصالة المحتوى وسلامته الأكاديمية.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">كيف أدفع وأستلم عملي؟ <span class="arr">+</span></div>
+        <div class="faq-a">يمكنك الدفع كاش عند الاستلام، أو عبر ماستر كارد، أو USDT. التوصيل مجاني داخل العزيزية، وللمحافظات الأخرى عبر شركات الشحن الموثوقة.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">هل تخدمون جميع الكليات والتخصصات؟ <span class="arr">+</span></div>
+        <div class="faq-a">نعم بالتأكيد! نخدم جميع الكليات والتخصصات — هندسية، طبية، علمية، رياضية، تربوية، قانونية، إدارية، إنسانية، معلوماتية، وغيرها. لا نستثني أي كلية.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">ماذا لو طلبت تعديل على العمل؟ <span class="arr">+</span></div>
+        <div class="faq-a">نوفر تعديلات مجانية في حال كان العمل لا يتطابق مع المتطلبات التي حددتها عند الطلب. رضاك هو أولويتنا.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">هل يمكن طلب العمل بشكل عاجل؟ <span class="arr">+</span></div>
+        <div class="faq-a">نعم! نقبل الطلبات العاجلة. تواصل معنا عبر واتساب أو تيليكرام وسنحاول تلبية طلبك في أقرب وقت ممكن.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="max-w">
-    <div class="section-center fade-in">
-      <span class="sec-tag">تواصل معنا</span>
-      <h2 class="sec-title">نحن هنا لمساعدتك</h2>
+    <div class="sec-center fade-in">
+      <div class="sec-tag">📞 تواصل معنا</div>
+      <h2 class="sec-title">نحن هنا <span class="hl">دائماً لمساعدتك</span></h2>
       <p class="sec-desc">تواصل معنا الآن وسنرد عليك في أقرب وقت</p>
     </div>
     <div class="contact-grid fade-in">
       <div class="contact-info">
-        <h3>طرق التواصل</h3>
+        <h3>📬 طرق التواصل</h3>
         <p>اختر الطريقة الأسهل لك وسنرد فوراً</p>
-        <a href="https://t.me/kennybbx" class="contact-item" target="_blank">
-          <div class="ci-icon ci-tg">✈️</div><div><h4>تيليكرام</h4><p>@kennybbx</p></div>
+        <a href="https://t.me/kennybbx" class="c-item" target="_blank">
+          <div class="c-ic c-tg">✈️</div><div><h4>تيليكرام</h4><p>@kennybbx</p></div>
         </a>
-        <a href="https://wa.me/9647749951234" class="contact-item" target="_blank">
-          <div class="ci-icon ci-wa">📱</div><div><h4>واتساب</h4><p>07749951234</p></div>
+        <a href="https://wa.me/9647749951234" class="c-item" target="_blank">
+          <div class="c-ic c-wa">📱</div><div><h4>واتساب</h4><p>07749951234</p></div>
         </a>
         <div class="manager-box">
-          <span>👨‍💼</span><div><h4>بإدارة</h4><p>حسين العبودي</p></div>
+          <span style="font-size:1.5rem">👨‍💼</span>
+          <div><h4>بإدارة</h4><p>حسين العبودي</p></div>
         </div>
       </div>
-      <div class="contact-form-box">
-        <h3>أرسل طلبك مباشرة</h3>
+      <div class="form-box">
+        <h3>📩 أرسل طلبك مباشرة</h3>
         <p>املأ النموذج وسنتواصل معك خلال دقائق</p>
-        <div class="form-group"><label>الاسم الكامل</label><input type="text" id="cName" placeholder="اسمك الكريم"></div>
-        <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="cPhone" placeholder="07xx xxx xxxx"></div>
-        <div class="form-group">
-          <label>نوع الخدمة</label>
+        <div class="fg"><label>الاسم الكامل</label><input id="cName" type="text" placeholder="اسمك الكريم"></div>
+        <div class="fg"><label>رقم الهاتف</label><input id="cPhone" type="tel" placeholder="07xx xxx xxxx"></div>
+        <div class="fg"><label>نوع الخدمة</label>
           <select id="cService">
             <option value="">-- اختر الخدمة --</option>
             <option>بحث جامعي</option><option>تقرير طلابي</option>
@@ -430,8 +626,8 @@ footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
             <option>استنساخ وطباعة</option><option>تنضيد ملف</option>
           </select>
         </div>
-        <div class="form-group"><label>تفاصيل الطلب</label><textarea id="cDetails" placeholder="المادة، الكلية، الموعد المطلوب..."></textarea></div>
-        <button class="submit-btn" onclick="sendContact()">📩 إرسال الطلب عبر واتساب</button>
+        <div class="fg"><label>تفاصيل الطلب</label><textarea id="cDetails" placeholder="الكلية، المادة، الموعد المطلوب..."></textarea></div>
+        <button class="submit-btn" onclick="sendContact()">📩 إرسال عبر واتساب</button>
       </div>
     </div>
   </div>
@@ -444,85 +640,78 @@ footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
       <div class="footer-brand">
         <div class="logo-wrap">
           <div class="logo-icon">📚</div>
-          <div class="logo-text">المكتبة الطلابية<span>بحوث • تقارير • ملازم</span></div>
+          <div class="logo-text"><span class="neon">المكتبة</span> الطلابية<span>بحوث • تقارير • ملازم</span></div>
         </div>
-        <p>نقدم خدمات أكاديمية احترافية متكاملة لطلاب الجامعات والمدارس في جميع أنحاء العراق.</p>
+        <p>خدمات أكاديمية احترافية لطلاب الجامعات والمدارس في جميع أنحاء العراق. بإدارة حسين العبودي.</p>
       </div>
       <div class="footer-col">
-        <h4>خدماتنا</h4>
+        <h4>SERVICES</h4>
         <ul>
           <li><a href="#services">بحوث جامعية</a></li>
           <li><a href="#services">تقارير طلابية</a></li>
           <li><a href="#services">هوم ووركات</a></li>
           <li><a href="#services">ملازم دراسية</a></li>
-          <li><a href="#services">استنساخ وطباعة</a></li>
+          <li><a href="#services">طباعة ونسخ</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>تواصل معنا</h4>
+        <h4>CONTACT</h4>
         <ul>
           <li><a href="https://t.me/kennybbx" target="_blank">تيليكرام: @kennybbx</a></li>
           <li><a href="https://wa.me/9647749951234" target="_blank">واتساب: 07749951234</a></li>
-          <li><a href="#">العزيزية، العراق</a></li>
+          <li><a href="#">العزيزية، واسط — العراق</a></li>
           <li><a href="#">نخدم جميع المحافظات</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2025 المكتبة الطلابية — بإدارة <span>حسين العبودي</span></p>
-      <p>صُمم بـ ❤️ لخدمة الطلاب العراقيين</p>
+      <p>صُمم بـ <span>❤️</span> لخدمة الطلاب العراقيين 🇮🇶</p>
     </div>
   </div>
 </footer>
 
 <script>
-var curService = 'بحث جامعي';
+var curSrv = 'بحث جامعي';
 
-function openModal(icon, title, sub, defSrv, college) {
+function openModal(icon,title,sub,defSrv,college){
   document.getElementById('mIcon').textContent = icon;
   document.getElementById('mTitle').textContent = title;
   document.getElementById('mSub').textContent = sub;
-  curService = defSrv;
-  document.querySelectorAll('.msrv-btn').forEach(function(b){
+  curSrv = defSrv;
+  document.querySelectorAll('.ms-btn').forEach(function(b){
     b.classList.remove('active');
-    if(b.dataset.srv === defSrv) b.classList.add('active');
+    if(b.dataset.srv===defSrv) b.classList.add('active');
   });
-  ['fName','fPhone','fSubject','fDeadline','fDetails'].forEach(function(id){
-    document.getElementById(id).value = '';
-  });
-
-  // Show or hide specialty banner
+  ['fName','fPhone','fSubject','fDeadline','fDetails'].forEach(function(id){ document.getElementById(id).value=''; });
   var banner = document.getElementById('specBanner');
   if(college){
-    document.getElementById('specBannerIcon').textContent = icon;
-    document.getElementById('specBannerText').textContent = college;
-    banner.style.display = 'flex';
+    document.getElementById('specBIcon').textContent = icon;
+    document.getElementById('specBTxt').textContent = college;
+    banner.classList.add('show');
     document.getElementById('fCollege').value = college;
   } else {
-    banner.style.display = 'none';
+    banner.classList.remove('show');
     document.getElementById('fCollege').value = '';
   }
-
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
+function closeModal(){
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
 
-function closeOutside(e) {
-  if(e.target === document.getElementById('modalOverlay')) closeModal();
-}
+function closeOut(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
 
-function pickSrv(el) {
-  document.querySelectorAll('.msrv-btn').forEach(function(b){ b.classList.remove('active'); });
+function pickSrv(el){
+  document.querySelectorAll('.ms-btn').forEach(function(b){ b.classList.remove('active'); });
   el.classList.add('active');
-  curService = el.dataset.srv;
+  curSrv = el.dataset.srv;
 }
 
-function sendWA() {
+function sendWA(){
   var name = document.getElementById('fName').value.trim();
   var phone = document.getElementById('fPhone').value.trim();
   var college = document.getElementById('fCollege').value.trim();
@@ -531,7 +720,7 @@ function sendWA() {
   var details = document.getElementById('fDetails').value.trim();
   if(!name){ alert('يرجى إدخال اسمك الكريم'); return; }
   var msg = 'السلام عليكم 👋\n*طلب جديد — المكتبة الطلابية* 📚\n\n';
-  msg += '📋 *الخدمة:* ' + curService + '\n';
+  msg += '📋 *الخدمة:* ' + curSrv + '\n';
   msg += '👤 *الاسم:* ' + name + '\n';
   if(phone) msg += '📞 *الهاتف:* ' + phone + '\n';
   if(college) msg += '🏫 *الكلية:* ' + college + '\n';
@@ -542,13 +731,13 @@ function sendWA() {
   closeModal();
 }
 
-function sendContact() {
+function sendContact(){
   var name = document.getElementById('cName').value.trim();
   var phone = document.getElementById('cPhone').value.trim();
   var service = document.getElementById('cService').value;
   var details = document.getElementById('cDetails').value.trim();
-  if(!name || !service){ alert('يرجى تعبئة الاسم ونوع الخدمة'); return; }
-  var msg = 'السلام عليكم 👋\n*طلب من قسم التواصل — المكتبة الطلابية* 📚\n\n';
+  if(!name||!service){ alert('يرجى تعبئة الاسم ونوع الخدمة'); return; }
+  var msg = 'السلام عليكم 👋\n*طلب من صفحة التواصل — المكتبة الطلابية* 📚\n\n';
   msg += '👤 *الاسم:* ' + name + '\n';
   if(phone) msg += '📞 *الهاتف:* ' + phone + '\n';
   msg += '📋 *الخدمة:* ' + service + '\n';
@@ -556,20 +745,44 @@ function sendContact() {
   window.open('https://wa.me/9647749951234?text=' + encodeURIComponent(msg), '_blank');
 }
 
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
+function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+function toggleFaq(el){
+  var item = el.parentElement;
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+  if(!wasOpen) item.classList.add('open');
 }
 
-var observer = new IntersectionObserver(function(entries){
+// Fade in observer
+var obs = new IntersectionObserver(function(entries){
   entries.forEach(function(e,i){
-    if(e.isIntersecting){
-      setTimeout(function(){ e.target.classList.add('visible'); }, i*80);
+    if(e.isIntersecting) setTimeout(function(){ e.target.classList.add('visible'); }, i*70);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(function(el){ obs.observe(el); });
+
+// Counter animation
+var statObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.querySelectorAll('.stat-num').forEach(function(el){
+        var target = parseInt(el.dataset.target);
+        var suffix = target === 100 ? '%' : (target === 500 ? '+' : '');
+        var cur = 0; var inc = target/60;
+        var t = setInterval(function(){
+          cur += inc;
+          if(cur >= target){ cur = target; clearInterval(t); }
+          el.textContent = Math.floor(cur) + suffix;
+        }, 25);
+      });
+      statObs.unobserve(entry.target);
     }
   });
-},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(function(el){ observer.observe(el); });
-
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+},{threshold:0.5});
+var statsBar = document.querySelector('.stats-bar');
+if(statsBar) statObs.observe(statsBar);
 </script>
 </body>
 </html>
