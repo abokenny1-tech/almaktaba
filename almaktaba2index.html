@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المكتبة الطلابية | بحوث • تقارير • ملازم</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#1a3a6b;--primary-light:#2352a0;--accent:#f0a500;--accent2:#e8f4fd;--bg:#f5f7fa;--white:#fff;--text:#1e2432;--muted:#6b7280;--border:#e5e7eb;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+.topbar{background:var(--primary);color:rgba(255,255,255,.85);padding:.5rem 5%;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;flex-wrap:wrap;gap:.4rem;}
+.topbar a{color:var(--accent);text-decoration:none;}
+nav{background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.08);position:sticky;top:0;z-index:900;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;}
+.logo-wrap{display:flex;align-items:center;gap:.8rem;}
+.logo-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+.logo-text{font-family:'Cairo',sans-serif;font-weight:900;font-size:1.25rem;color:var(--primary);line-height:1.2;}
+.logo-text span{display:block;font-size:.7rem;font-weight:500;color:var(--muted);}
+.nav-links{display:flex;list-style:none;gap:2rem;}
+.nav-links a{color:var(--text);text-decoration:none;font-weight:600;font-size:.92rem;padding:.3rem 0;border-bottom:2px solid transparent;transition:all .2s;}
+.nav-links a:hover{color:var(--primary);border-bottom-color:var(--accent);}
+.contact-btn{background:linear-gradient(135deg,var(--primary),var(--primary-light))!important;color:#fff!important;padding:.6rem 1.4rem!important;border-radius:50px!important;border-bottom:none!important;box-shadow:0 4px 15px rgba(26,58,107,.3);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;}
+.hamburger span{width:25px;height:2.5px;background:var(--primary);border-radius:2px;}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:#fff;padding:1.5rem 5%;box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:899;flex-direction:column;gap:1rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--text);text-decoration:none;font-weight:600;font-size:1rem;padding:.5rem 0;border-bottom:1px solid var(--border);}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#0f2347 60%,#1a3a6b 100%);padding:5rem 5% 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,165,0,.12) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.4);padding:.35rem 1rem;border-radius:50px;font-size:.8rem;color:var(--accent);font-weight:700;margin-bottom:1.5rem;}
+.hero h1{font-family:'Cairo',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.25;margin-bottom:1.2rem;}
+.hero h1 .gold{color:var(--accent);}
+.hero p{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.9;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-gold{background:linear-gradient(135deg,var(--accent),#d4920a);color:#1a1a1a;padding:.85rem 2rem;border-radius:50px;font-weight:800;font-size:.95rem;text-decoration:none;box-shadow:0 6px 25px rgba(240,165,0,.35);transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;}
+.btn-gold:hover{transform:translateY(-3px);}
+.btn-outline-white{border:2px solid rgba(255,255,255,.3);color:#fff;padding:.85rem 2rem;border-radius:50px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s;}
+.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+.hero-visual{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:2rem;backdrop-filter:blur(10px);}
+.hero-visual h3{color:var(--accent);font-size:1rem;font-weight:700;margin-bottom:1.2rem;}
+.service-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:.5rem 1rem;border-radius:50px;color:#fff;font-size:.85rem;margin:.3rem .2rem;}
+.free-badge{margin-top:1.5rem;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.8rem;color:#6ee7b7;font-size:.88rem;font-weight:600;}
+/* STATS */
+.stats-bar{background:#fff;padding:2rem 5%;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.stat{text-align:center;}
+.stat-num{font-family:'Cairo',sans-serif;font-size:2rem;font-weight:900;color:var(--primary);}
+.stat-label{color:var(--muted);font-size:.82rem;margin-top:.2rem;}
+/* SECTION */
+.section{padding:5rem 5%;}
+.section-center{text-align:center;}
+.max-w{max-width:1100px;margin:0 auto;}
+.sec-tag{display:inline-block;background:var(--accent2);color:var(--primary);font-size:.78rem;font-weight:700;letter-spacing:2px;padding:.3rem 1rem;border-radius:50px;margin-bottom:1rem;text-transform:uppercase;}
+h2.sec-title{font-family:'Cairo',sans-serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;color:var(--primary);margin-bottom:.8rem;}
+.sec-desc{color:var(--muted);font-size:.98rem;line-height:1.8;max-width:550px;margin:0 auto 3rem;}
+/* SERVICES */
+.services-bg{background:#fff;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+.srv-card{border:1.5px solid var(--border);border-radius:18px;padding:2rem 1.7rem;transition:all .35s;cursor:pointer;position:relative;overflow:hidden;background:#fff;}
+.srv-card::after{content:'اضغط لتقديم الطلب ←';position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;font-size:.8rem;font-weight:700;text-align:center;padding:.6rem;transform:translateY(100%);transition:transform .3s;}
+.srv-card:hover{border-color:var(--primary);transform:translateY(-5px);box-shadow:0 15px 45px rgba(26,58,107,.12);}
+.srv-card:hover::after{transform:translateY(0);}
+.srv-icon{width:54px;height:54px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;}
+.srv-card h3{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:.6rem;}
+.srv-card p{color:var(--muted);font-size:.88rem;line-height:1.7;}
+/* SPECIALTIES */
+.specialties-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;}
+.spec-item{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:1.4rem 1rem;text-align:center;transition:all .3s;cursor:pointer;}
+.spec-item:hover{border-color:var(--primary);box-shadow:0 8px 25px rgba(26,58,107,.12);transform:translateY(-4px);background:var(--primary);}
+.spec-item:hover .icon,.spec-item:hover .spec-name{color:#fff;}
+.spec-item .icon{font-size:1.8rem;margin-bottom:.5rem;display:block;transition:.3s;}
+.spec-item .spec-name{display:block;font-size:.88rem;font-weight:700;color:var(--primary);transition:.3s;}
+.spec-item .click-hint{font-size:.7rem;color:var(--muted);margin-top:.3rem;transition:.3s;}
+.spec-item:hover .click-hint{color:rgba(255,255,255,.7);}
+/* PAYMENT */
+.payment-bg{background:#fff;}
+.payment-cards{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;}
+.pay-card{background:var(--bg);border:2px solid var(--border);border-radius:20px;padding:2rem 2.5rem;text-align:center;min-width:180px;transition:all .3s;}
+.pay-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 35px rgba(240,165,0,.15);}
+.pay-icon{font-size:2.5rem;margin-bottom:.8rem;}
+.pay-card h4{font-weight:800;font-size:1rem;color:var(--primary);margin-bottom:.3rem;}
+.pay-card p{font-size:.8rem;color:var(--muted);}
+/* DELIVERY */
+.delivery-box{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);border-radius:24px;padding:3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;color:#fff;}
+.delivery-box h2{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900;margin-bottom:1rem;color:#fff;}
+.delivery-box>div>p{color:rgba(255,255,255,.8);line-height:1.8;font-size:.97rem;}
+.delivery-features{display:flex;flex-direction:column;gap:1rem;}
+.delivery-feat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:1rem 1.3rem;display:flex;align-items:center;gap:1rem;}
+.feat-icon{font-size:1.5rem;flex-shrink:0;}
+.delivery-feat h4{font-weight:700;font-size:.95rem;}
+.delivery-feat p{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:.2rem;}
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+.contact-info{background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:24px;padding:3rem 2.5rem;color:#fff;}
+.contact-info h3{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;margin-bottom:.5rem;}
+.contact-info>p{color:rgba(255,255,255,.7);margin-bottom:2rem;font-size:.9rem;}
+.contact-item{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;background:rgba(255,255,255,.08);border-radius:14px;padding:1rem 1.2rem;text-decoration:none;color:#fff;transition:all .3s;}
+.contact-item:hover{background:rgba(240,165,0,.2);}
+.ci-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.ci-tg{background:rgba(41,182,246,.2);}
+.ci-wa{background:rgba(37,211,102,.2);}
+.contact-item h4{font-size:.85rem;color:rgba(255,255,255,.6);font-weight:500;}
+.contact-item p{font-size:1rem;font-weight:700;margin:0;}
+.manager-box{margin-top:1.5rem;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem;}
+.manager-box>span{font-size:1.5rem;}
+.manager-box h4{font-size:.8rem;color:rgba(255,255,255,.6);}
+.manager-box p{color:var(--accent);font-weight:700;font-size:.95rem;margin:0;}
+.contact-form-box{background:#fff;border-radius:24px;padding:2.5rem;box-shadow:0 4px 30px rgba(0,0,0,.06);border:1.5px solid var(--border);}
+.contact-form-box h3{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900;color:var(--primary);margin-bottom:.4rem;}
+.contact-form-box>p{color:var(--muted);font-size:.87rem;margin-bottom:1.8rem;}
+.form-group{margin-bottom:1.2rem;}
+.form-group label{display:block;font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Tajawal',sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);background:#fff;}
+.form-group textarea{resize:vertical;min-height:100px;}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;padding:.95rem;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(26,58,107,.3);}
+.submit-btn:hover{transform:translateY(-2px);}
+/* FOOTER */
+footer{background:#0a1a35;color:rgba(255,255,255,.7);padding:3rem 5% 1.5rem;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.footer-brand .logo-text{color:#fff;}
+.footer-brand p{font-size:.87rem;line-height:1.8;margin-top:1rem;max-width:280px;}
+.footer-col h4{color:#fff;font-weight:700;margin-bottom:1rem;font-size:.95rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:.6rem;font-size:.85rem;}
+.footer-col ul li a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--accent);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8rem;}
+.footer-bottom span{color:var(--accent);}
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:1.5rem;left:1.5rem;width:58px;height:58px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;text-decoration:none;box-shadow:0 6px 25px rgba(37,211,102,.45);z-index:999;transition:all .3s;animation:waBounce 2s infinite;}
+.wa-float:hover{transform:scale(1.1);}
+@keyframes waBounce{0%,100%{box-shadow:0 6px 25px rgba(37,211,102,.45);}50%{box-shadow:0 8px 35px rgba(37,211,102,.7);}}
+/* ═══ MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,26,53,.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:#fff;border-radius:24px;width:100%;max-width:530px;max-height:92vh;overflow-y:auto;transform:translateY(30px) scale(.97);transition:transform .35s cubic-bezier(.34,1.56,.64,1);position:relative;}
+.modal-overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-header{background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:1.8rem 2rem 1.4rem;border-radius:24px 24px 0 0;color:#fff;position:relative;}
+.modal-icon{font-size:2.2rem;margin-bottom:.5rem;}
+.modal-header h3{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900;}
+.modal-header p{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:.2rem;}
+.modal-close{position:absolute;top:1rem;left:1rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.modal-close:hover{background:rgba(255,255,255,.25);}
+.college-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);padding:.25rem .8rem;border-radius:50px;font-size:.78rem;color:var(--accent);font-weight:700;margin-top:.6rem;}
+.modal-body{padding:1.8rem 2rem;}
+.srv-select-label{font-size:.85rem;font-weight:700;color:var(--text);display:block;margin-bottom:.7rem;}
+.modal-services{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.5rem;}
+.msrv-btn{border:1.5px solid var(--border);border-radius:10px;padding:.65rem .5rem;text-align:center;cursor:pointer;transition:all .2s;font-family:'Tajawal',sans-serif;font-size:.78rem;font-weight:700;color:var(--text);background:var(--bg);}
+.msrv-btn .ms-icon{font-size:1.1rem;display:block;margin-bottom:.2rem;}
+.msrv-btn:hover,.msrv-btn.active{border-color:var(--primary);background:var(--primary);color:#fff;}
+.modal .form-group label{font-size:.82rem;}
+.modal .form-group input,.modal .form-group select,.modal .form-group textarea{font-size:.88rem;padding:.7rem .9rem;}
+.modal .form-group textarea{min-height:80px;}
+.modal-submit{width:100%;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:.9rem;border:none;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(37,211,102,.35);display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.modal-submit:hover{transform:translateY(-2px);}
+/* FADE */
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+/* RESPONSIVE */
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-visual{display:none;}.contact-grid{grid-template-columns:1fr;}.delivery-box{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){.nav-links{display:none;}.hamburger{display:flex;}.stats-bar{gap:2rem;}.footer-top{grid-template-columns:1fr;gap:2rem;}.topbar{font-size:.75rem;}.footer-bottom{flex-direction:column;text-align:center;}.modal-services{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/9647749951234" class="wa-float" target="_blank">💬</a>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOutside(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-icon" id="mIcon">📄</div>
+      <h3 id="mTitle">تقديم طلب</h3>
+      <p id="mSub">اختر الخدمة وأرسل طلبك مباشرة</p>
+    </div>
+    <!-- SPECIALTY BANNER (shown only when coming from specialty) -->
+    <div id="specBanner" style="display:none;background:#fff7e6;border-bottom:2px solid #f0a500;padding:.9rem 2rem;display:flex;align-items:center;gap:.7rem;">
+      <span style="font-size:1.4rem" id="specBannerIcon">🎓</span>
+      <div>
+        <div style="font-size:.72rem;color:#92700a;font-weight:700;text-transform:uppercase;letter-spacing:1px;">التخصص المحدد</div>
+        <div id="specBannerText" style="font-size:.95rem;font-weight:800;color:#7a5c00;"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <span class="srv-select-label">🔹 اختر نوع الخدمة المطلوبة</span>
+      <div class="modal-services">
+        <div class="msrv-btn active" data-srv="بحث جامعي" onclick="pickSrv(this)"><span class="ms-icon">📄</span>بحث جامعي</div>
+        <div class="msrv-btn" data-srv="تقرير طلابي" onclick="pickSrv(this)"><span class="ms-icon">📊</span>تقرير طلابي</div>
+        <div class="msrv-btn" data-srv="هوم وورك" onclick="pickSrv(this)"><span class="ms-icon">🏠</span>هوم وورك</div>
+        <div class="msrv-btn" data-srv="ملزمة دراسية" onclick="pickSrv(this)"><span class="ms-icon">📋</span>ملزمة دراسية</div>
+        <div class="msrv-btn" data-srv="نسخ وطباعة" onclick="pickSrv(this)"><span class="ms-icon">🖨️</span>نسخ وطباعة</div>
+        <div class="msrv-btn" data-srv="تنضيد ملف" onclick="pickSrv(this)"><span class="ms-icon">✍️</span>تنضيد ملف</div>
+      </div>
+      <div class="form-group"><label>الاسم الكريم</label><input id="fName" type="text" placeholder="مثال: علي حسن"></div>
+      <div class="form-group"><label>رقم الهاتف / واتساب</label><input id="fPhone" type="tel" placeholder="07xx xxx xxxx"></div>
+      <div class="form-group"><label>الكلية / القسم</label><input id="fCollege" type="text" placeholder="مثال: كلية الهندسة / قسم المدني"></div>
+      <div class="form-group"><label>المادة أو عنوان البحث</label><input id="fSubject" type="text" placeholder="مثال: بحث في ميكانيك التربة"></div>
+      <div class="form-group"><label>موعد التسليم المطلوب</label><input id="fDeadline" type="text" placeholder="مثال: بعد يومين / يوم الخميس"></div>
+      <div class="form-group"><label>تفاصيل إضافية (اختياري)</label><textarea id="fDetails" placeholder="أي تفاصيل تساعدنا على تقديم أفضل خدمة..."></textarea></div>
+      <button class="modal-submit" onclick="sendWA()">📩 إرسال الطلب عبر واتساب</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>📍 خدماتنا تشمل جميع محافظات العراق | التوصيل مجاني داخل العزيزية</span>
+  <span>📞 <a href="https://wa.me/9647749951234">07749951234</a> | <a href="https://t.me/kennybbx">@kennybbx</a></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-icon">📚</div>
+    <div class="logo-text">المكتبة الطلابية<span>بحوث • تقارير • ملازم</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#specialties">التخصصات</a></li>
+    <li><a href="#delivery">التوصيل</a></li>
+    <li><a href="#payment">الدفع</a></li>
+    <li><a href="#contact" class="contact-btn">تواصل معنا</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">خدماتنا</a>
+  <a href="#specialties" onclick="toggleMenu()">التخصصات</a>
+  <a href="#delivery" onclick="toggleMenu()">التوصيل</a>
+  <a href="#payment" onclick="toggleMenu()">الدفع</a>
+  <a href="#contact" onclick="toggleMenu()">تواصل معنا</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner max-w">
+    <div>
+      <div class="hero-badge">🎓 الخيار الأول للطلاب</div>
+      <h1>المكتبة الطلابية<br><span class="gold">خدمات أكاديمية متكاملة</span></h1>
+      <p>نقدم خدمات أكاديمية احترافية لطلاب الجامعات والمدارس — بحوث، تقارير، ملازم، واجبات، ونسخ وطباعة. نخدم جميع التخصصات ونوصل لكل محافظات العراق.</p>
+      <div class="hero-btns">
+        <a href="https://t.me/kennybbx" class="btn-gold" target="_blank">📩 تواصل الآن</a>
+        <a href="#services" class="btn-outline-white">تعرف على خدماتنا</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <h3>🗂️ خدماتنا الأكاديمية</h3>
+      <div>
+        <span class="service-pill">📄 بحوث جامعية</span>
+        <span class="service-pill">📊 تقارير طلابية</span>
+        <span class="service-pill">📝 هوم ووركات</span>
+        <span class="service-pill">📋 ملازم دراسية</span>
+        <span class="service-pill">🖨️ نسخ وطباعة</span>
+        <span class="service-pill">🚚 توصيل سريع</span>
+      </div>
+      <div class="free-badge">✅ التوصيل مجاني داخل العزيزية — ونخدم جميع محافظات العراق!</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat fade-in"><div class="stat-num">500+</div><div class="stat-label">طالب مستفيد</div></div>
+  <div class="stat fade-in"><div class="stat-num">20+</div><div class="stat-label">تخصص جامعي</div></div>
+  <div class="stat fade-in"><div class="stat-num">18</div><div class="stat-label">محافظة نخدمها</div></div>
+  <div class="stat fade-in"><div class="stat-num">100%</div><div class="stat-label">رضا الطلاب</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="section services-bg" id="services">
+  <div class="max-w">
+    <div class="section-center fade-in">
+      <span class="sec-tag">خدماتنا</span>
+      <h2 class="sec-title">كل ما يحتاجه الطالب في مكان واحد</h2>
+      <p class="sec-desc">اضغط على أي خدمة لتقديم طلبك مباشرة 👇</p>
+    </div>
+    <div class="services-grid">
+      <div class="srv-card fade-in" onclick="openModal('📄','إنشاء وإعداد البحوث الجامعية','بحوث أكاديمية متكاملة بمصادر موثوقة','بحث جامعي')">
+        <div class="srv-icon">📄</div>
+        <h3>إنشاء وإعداد البحوث الجامعية</h3>
+        <p>بحوث أكاديمية متكاملة بمصادر موثوقة ومنهجية علمية سليمة لجميع التخصصات.</p>
+      </div>
+      <div class="srv-card fade-in" onclick="openModal('📊','تقارير لجميع الأقسام','تقارير دراسية وعلمية لكل الكليات','تقرير طلابي')">
+        <div class="srv-icon">📊</div>
+        <h3>تقارير لجميع الأقسام</h3>
+        <p>تقارير دراسية شاملة لكل الكليات بأسلوب واضح ومحتوى دقيق ومنظم.</p>
+      </div>
+      <div class="srv-card fade-in" onclick="openModal('🏠','حلول الهوم ووركات','واجبات منزلية كاملة ومشروحة','هوم وورك')">
+        <div class="srv-icon">🏠</div>
+        <h3>حلول الهوم ووركات</h3>
+        <p>حلول كاملة ومشروحة للواجبات المنزلية في جميع المواد بأسلوب واضح.</p>
+      </div>
+      <div class="srv-card fade-in" onclick="openModal('📋','إنشاء الملازم الدراسية','ملازم منظمة لجميع المواد','ملزمة دراسية')">
+        <div class="srv-icon">📋</div>
+        <h3>إنشاء الملازم الدراسية</h3>
+        <p>ملازم منظمة ومرتبة لجميع المواد الجامعية والمدرسية بتنسيق جميل.</p>
+      </div>
+      <div class="srv-card fade-in" onclick="openModal('🖨️','استنساخ وطباعة','طباعة واستنساخ بجودة عالية','نسخ وطباعة')">
+        <div class="srv-icon">🖨️</div>
+        <h3>استنساخ وطباعة</h3>
+        <p>خدمات طباعة واستنساخ عالية الجودة للمستندات والبحوث بأسعار تنافسية.</p>
+      </div>
+      <div class="srv-card fade-in" onclick="openModal('✍️','تنضيد وتنسيق النصوص','تنسيق احترافي بالمعايير الأكاديمية','تنضيد ملف')">
+        <div class="srv-icon">✍️</div>
+        <h3>تنضيد وتنسيق النصوص</h3>
+        <p>تنضيد احترافي للبحوث والرسائل بحسب المعايير الأكاديمية المطلوبة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALTIES -->
+<section class="section" id="specialties">
+  <div class="max-w">
+    <div class="section-center fade-in">
+      <span class="sec-tag">التخصصات</span>
+      <h2 class="sec-title">نخدم جميع الكليات والتخصصات</h2>
+      <p class="sec-desc">اضغط على تخصصك وسيُفتح نموذج الطلب مباشرة 👇</p>
+    </div>
+    <div class="specialties-grid fade-in">
+      <div class="spec-item" onclick="openModal('🏗️','التخصص الهندسي','خدمات أكاديمية للكليات الهندسية بجميع فروعها','بحث جامعي','كلية الهندسة')">
+        <div class="icon">🏗️</div><span class="spec-name">هندسية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('⚕️','التخصص الطبي','خدمات للكليات الطبية والصحية والصيدلانية','بحث جامعي','كلية الطب / الصحة')">
+        <div class="icon">⚕️</div><span class="spec-name">طبية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('🧪','التخصص العلمي','بحوث وتقارير علمية في الكيمياء والفيزياء والأحياء','بحث جامعي','كلية العلوم')">
+        <div class="icon">🧪</div><span class="spec-name">علمية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('📐','التخصص الرياضي','حلول وبحوث في الرياضيات والإحصاء','هوم وورك','قسم الرياضيات والإحصاء')">
+        <div class="icon">📐</div><span class="spec-name">رياضية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('🎓','التخصص التربوي','خدمات لكليات التربية وعلم النفس','بحث جامعي','كلية التربية')">
+        <div class="icon">🎓</div><span class="spec-name">تربوية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('⚖️','التخصص القانوني','بحوث وتقارير قانونية وحقوقية متخصصة','بحث جامعي','كلية القانون والحقوق')">
+        <div class="icon">⚖️</div><span class="spec-name">قانونية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('💼','التخصص الإداري','خدمات لكليات الإدارة والاقتصاد والمحاسبة','تقرير طلابي','كلية الإدارة والاقتصاد')">
+        <div class="icon">💼</div><span class="spec-name">إدارية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('🌍','التخصصات الإنسانية','خدمات للكليات الإنسانية والآداب والاجتماعية','بحث جامعي','كلية الآداب / العلوم الإنسانية')">
+        <div class="icon">🌍</div><span class="spec-name">إنسانية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('💻','التخصص المعلوماتي','بحوث وتقارير في الحاسوب والبرمجة والشبكات','بحث جامعي','كلية الحاسوب والمعلوماتية')">
+        <div class="icon">💻</div><span class="spec-name">معلوماتية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('🎨','تخصص الفنون','خدمات أكاديمية لكليات الفنون الجميلة','بحث جامعي','كلية الفنون الجميلة')">
+        <div class="icon">🎨</div><span class="spec-name">فنون</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('🌱','التخصص الزراعي','بحوث وتقارير للكليات الزراعية والبيطرية','بحث جامعي','كلية الزراعة / البيطرة')">
+        <div class="icon">🌱</div><span class="spec-name">زراعية</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+      <div class="spec-item" onclick="openModal('📚','جميع التخصصات','لا نستثني أي كلية أو قسم','بحث جامعي','')">
+        <div class="icon">📚</div><span class="spec-name">وجميعها!</span><div class="click-hint">اضغط للطلب</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section class="section" id="delivery">
+  <div class="max-w">
+    <div class="delivery-box fade-in">
+      <div>
+        <h2>🚚 التوصيل لباب البيت</h2>
+        <p>نوصل أعمالك مباشرة لعنوانك. التوصيل <strong style="color:var(--accent)">مجاني بالكامل</strong> داخل منطقة العزيزية، ونخدم جميع محافظات العراق عبر شركات الشحن.</p>
+      </div>
+      <div class="delivery-features">
+        <div class="delivery-feat"><div class="feat-icon">🏘️</div><div><h4>داخل العزيزية</h4><p>توصيل مجاني لجميع أنحاء العزيزية</p></div></div>
+        <div class="delivery-feat"><div class="feat-icon">🗺️</div><div><h4>جميع المحافظات</h4><p>نوصل لكل محافظات العراق عبر الشحن</p></div></div>
+        <div class="delivery-feat"><div class="feat-icon">⚡</div><div><h4>سرعة التسليم</h4><p>نلتزم بالمواعيد ولا نضيع وقتك</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="section payment-bg" id="payment">
+  <div class="max-w">
+    <div class="section-center fade-in">
+      <span class="sec-tag">طرق الدفع</span>
+      <h2 class="sec-title">ادفع بالطريقة اللي تناسبك</h2>
+      <p class="sec-desc">نوفر خيارات دفع متعددة لراحتك</p>
+    </div>
+    <div class="payment-cards fade-in">
+      <div class="pay-card"><div class="pay-icon">💵</div><h4>كاش</h4><p>ادفع نقداً عند الاستلام</p></div>
+      <div class="pay-card"><div class="pay-icon">💳</div><h4>ماستر كارد</h4><p>دفع إلكتروني آمن</p></div>
+      <div class="pay-card"><div class="pay-icon">🪙</div><h4>USDT</h4><p>دفع بالعملات الرقمية</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="max-w">
+    <div class="section-center fade-in">
+      <span class="sec-tag">تواصل معنا</span>
+      <h2 class="sec-title">نحن هنا لمساعدتك</h2>
+      <p class="sec-desc">تواصل معنا الآن وسنرد عليك في أقرب وقت</p>
+    </div>
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <h3>طرق التواصل</h3>
+        <p>اختر الطريقة الأسهل لك وسنرد فوراً</p>
+        <a href="https://t.me/kennybbx" class="contact-item" target="_blank">
+          <div class="ci-icon ci-tg">✈️</div><div><h4>تيليكرام</h4><p>@kennybbx</p></div>
+        </a>
+        <a href="https://wa.me/9647749951234" class="contact-item" target="_blank">
+          <div class="ci-icon ci-wa">📱</div><div><h4>واتساب</h4><p>07749951234</p></div>
+        </a>
+        <div class="manager-box">
+          <span>👨‍💼</span><div><h4>بإدارة</h4><p>حسين العبودي</p></div>
+        </div>
+      </div>
+      <div class="contact-form-box">
+        <h3>أرسل طلبك مباشرة</h3>
+        <p>املأ النموذج وسنتواصل معك خلال دقائق</p>
+        <div class="form-group"><label>الاسم الكامل</label><input type="text" id="cName" placeholder="اسمك الكريم"></div>
+        <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="cPhone" placeholder="07xx xxx xxxx"></div>
+        <div class="form-group">
+          <label>نوع الخدمة</label>
+          <select id="cService">
+            <option value="">-- اختر الخدمة --</option>
+            <option>بحث جامعي</option><option>تقرير طلابي</option>
+            <option>هوم وورك</option><option>ملزمة دراسية</option>
+            <option>استنساخ وطباعة</option><option>تنضيد ملف</option>
+          </select>
+        </div>
+        <div class="form-group"><label>تفاصيل الطلب</label><textarea id="cDetails" placeholder="المادة، الكلية، الموعد المطلوب..."></textarea></div>
+        <button class="submit-btn" onclick="sendContact()">📩 إرسال الطلب عبر واتساب</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="max-w">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <div class="logo-icon">📚</div>
+          <div class="logo-text">المكتبة الطلابية<span>بحوث • تقارير • ملازم</span></div>
+        </div>
+        <p>نقدم خدمات أكاديمية احترافية متكاملة لطلاب الجامعات والمدارس في جميع أنحاء العراق.</p>
+      </div>
+      <div class="footer-col">
+        <h4>خدماتنا</h4>
+        <ul>
+          <li><a href="#services">بحوث جامعية</a></li>
+          <li><a href="#services">تقارير طلابية</a></li>
+          <li><a href="#services">هوم ووركات</a></li>
+          <li><a href="#services">ملازم دراسية</a></li>
+          <li><a href="#services">استنساخ وطباعة</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <ul>
+          <li><a href="https://t.me/kennybbx" target="_blank">تيليكرام: @kennybbx</a></li>
+          <li><a href="https://wa.me/9647749951234" target="_blank">واتساب: 07749951234</a></li>
+          <li><a href="#">العزيزية، العراق</a></li>
+          <li><a href="#">نخدم جميع المحافظات</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 المكتبة الطلابية — بإدارة <span>حسين العبودي</span></p>
+      <p>صُمم بـ ❤️ لخدمة الطلاب العراقيين</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+var curService = 'بحث جامعي';
+
+function openModal(icon, title, sub, defSrv, college) {
+  document.getElementById('mIcon').textContent = icon;
+  document.getElementById('mTitle').textContent = title;
+  document.getElementById('mSub').textContent = sub;
+  curService = defSrv;
+  document.querySelectorAll('.msrv-btn').forEach(function(b){
+    b.classList.remove('active');
+    if(b.dataset.srv === defSrv) b.classList.add('active');
+  });
+  ['fName','fPhone','fSubject','fDeadline','fDetails'].forEach(function(id){
+    document.getElementById(id).value = '';
+  });
+
+  // Show or hide specialty banner
+  var banner = document.getElementById('specBanner');
+  if(college){
+    document.getElementById('specBannerIcon').textContent = icon;
+    document.getElementById('specBannerText').textContent = college;
+    banner.style.display = 'flex';
+    document.getElementById('fCollege').value = college;
+  } else {
+    banner.style.display = 'none';
+    document.getElementById('fCollege').value = '';
+  }
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOutside(e) {
+  if(e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function pickSrv(el) {
+  document.querySelectorAll('.msrv-btn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  curService = el.dataset.srv;
+}
+
+function sendWA() {
+  var name = document.getElementById('fName').value.trim();
+  var phone = document.getElementById('fPhone').value.trim();
+  var college = document.getElementById('fCollege').value.trim();
+  var subject = document.getElementById('fSubject').value.trim();
+  var deadline = document.getElementById('fDeadline').value.trim();
+  var details = document.getElementById('fDetails').value.trim();
+  if(!name){ alert('يرجى إدخال اسمك الكريم'); return; }
+  var msg = 'السلام عليكم 👋\n*طلب جديد — المكتبة الطلابية* 📚\n\n';
+  msg += '📋 *الخدمة:* ' + curService + '\n';
+  msg += '👤 *الاسم:* ' + name + '\n';
+  if(phone) msg += '📞 *الهاتف:* ' + phone + '\n';
+  if(college) msg += '🏫 *الكلية:* ' + college + '\n';
+  if(subject) msg += '📖 *المادة/البحث:* ' + subject + '\n';
+  if(deadline) msg += '⏰ *موعد التسليم:* ' + deadline + '\n';
+  if(details) msg += '📝 *تفاصيل:* ' + details + '\n';
+  window.open('https://wa.me/9647749951234?text=' + encodeURIComponent(msg), '_blank');
+  closeModal();
+}
+
+function sendContact() {
+  var name = document.getElementById('cName').value.trim();
+  var phone = document.getElementById('cPhone').value.trim();
+  var service = document.getElementById('cService').value;
+  var details = document.getElementById('cDetails').value.trim();
+  if(!name || !service){ alert('يرجى تعبئة الاسم ونوع الخدمة'); return; }
+  var msg = 'السلام عليكم 👋\n*طلب من قسم التواصل — المكتبة الطلابية* 📚\n\n';
+  msg += '👤 *الاسم:* ' + name + '\n';
+  if(phone) msg += '📞 *الهاتف:* ' + phone + '\n';
+  msg += '📋 *الخدمة:* ' + service + '\n';
+  if(details) msg += '📝 *التفاصيل:* ' + details;
+  window.open('https://wa.me/9647749951234?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){
+      setTimeout(function(){ e.target.classList.add('visible'); }, i*80);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(function(el){ observer.observe(el); });
+
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
